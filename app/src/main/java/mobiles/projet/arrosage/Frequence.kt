@@ -1,6 +1,7 @@
 package mobiles.projet.arrosage
 import android.icu.util.Calendar
 import androidx.room.*
+@Entity
 data class Frequence(
  @PrimaryKey
  var IdPlante : Int,
