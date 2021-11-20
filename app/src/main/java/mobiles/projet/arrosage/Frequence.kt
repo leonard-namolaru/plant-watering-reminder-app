@@ -7,7 +7,7 @@ data class Frequence(
  var IdFrequence : Int,
  var dateDebut : Calendar,
  var dateFin : Calendar,
- var nbFois : Int,
+ var nbFois :  Int,
  var Frequence : String
 
 
