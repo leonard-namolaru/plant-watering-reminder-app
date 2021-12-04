@@ -69,7 +69,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
             // Pour tester : récupérer toutes les plantes
             val lesPlantes: Array<TablePlante> = bd.loadAll()
             for(plante in lesPlantes)
-                Log.d("liste des plantes", "${plante.nomCommun}")
+                Log.d("liste des pays", "${plante.nomCommun}")
 
         }.start()
 
