@@ -8,7 +8,7 @@ import androidx.room.*
  */
 @Database(entities = [TablePlante::class], version = 1) // version : The database version.
 abstract class PlantesBD : RoomDatabase() { // Une classe pour representer la base de données
-    abstract fun myDao(): AppDao //  la fonction abstraite qui retourne le Dao que nous avons défini
+    abstract fun myDao(): MyDao //  la fonction abstraite qui retourne le Dao que nous avons défini
 
     // Classe en singleton :
     // une classe avec une seule instance qu’on obtient en appelant getDatabase

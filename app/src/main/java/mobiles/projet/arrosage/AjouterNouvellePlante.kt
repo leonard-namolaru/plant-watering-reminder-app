@@ -33,12 +33,13 @@ class AjouterNouvellePlante : AppCompatActivity() {
         // Cette fonction me permet d'ajouter des plantes dans la base de données
         // C'est à dire on récupère les champs et on les mets dans la bd les champs
     fun ajouter(button: View){
-        val bd = PlanteBD.getDatabase(application).myDao()
+        val bd = PlantesBD.getDatabase(application).myDao()
 
-        // Supprimer les espaces au début et à la fin de chaque valeur String
+            // Supprimer les espaces au début et à la fin de chaque valeur String
+         /*
         var pays: String = binding.edPays.text.toString().trim()
         var continent: String = binding.edContinent.text.toString().trim()
-        var capitale: String = binding.edCapitale.text.toString().trim()
+        var capitale: String = binding.edCapitale.text.toString().trim()*/
 
         // Vérifier que les Strings obtenus ne soient pas vide
         if(pays == "" || continent == "" || capitale == ""){
