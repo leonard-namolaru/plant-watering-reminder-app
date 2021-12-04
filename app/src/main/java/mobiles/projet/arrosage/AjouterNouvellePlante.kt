@@ -20,9 +20,26 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
 
 
+    fun ajouter(button: View){
+        val bd = PlantesBD.getDatabase(application).myDao()
+        // Ajouter une nouvelle fréquence
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
         // Cette fonction me permet d'ajouter des plantes dans la base de données
         // C'est à dire on récupère les champs et on les mets dans la bd les champs
-    fun ajouter(button: View){
+    fun valider(button: View){
         val bd = PlantesBD.getDatabase(application).myDao()
          // Supprimer les espaces au début et à la fin de chaque valeur String
 
