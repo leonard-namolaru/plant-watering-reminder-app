@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
-    var listeDesPlantes : MutableList<Plante> = mutableListOf<Plante>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,11 +19,21 @@ class MainActivity : AppCompatActivity() {
         recyclerView.hasFixedSize() /* pour améliorer les pérformances*/
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // créer une liste de Strings à partir de fichier ressources (resources : une propriété d'Activity)
-        val nomsDesPlantes: Array<String> =  resources.getStringArray(R.array.plantes)
+        /*  créer une liste de Strings à partir de fichier ressources
+            //var listeDesPlantes : MutableList<Plante> = mutableListOf<Plante>()
+           // créer une liste de Strings à partir de fichier ressources (resources : une propriété d'Activity)
+            val nomsDesPlantes: Array<String> =  resources.getStringArray(R.array.plantes)
 
-        for(i in nomsDesPlantes.indices)
-            listeDesPlantes.add( Plante(nomsDesPlantes[i]) )
+            for(i in nomsDesPlantes.indices)
+                listeDesPlantes.add( Plante(nomsDesPlantes[i]) )
+         */
+
+        // BDD
+        val bd = PlantesBD.getDatabase(application)
+        var listeDesPlantes : Array<TablePlante> = arrayOf() // Le Array de pays à afficher dans RecyclerView
+        val t= Thread{ listeDesPlantes = bd.myDao().loadAll() }
+        t.start()
+        t.join()
 
         val couleurPaire: Int = ResourcesCompat.getColor(resources, R.color.couleurPaire, null)
         val couleurImpaire: Int = ResourcesCompat.getColor(resources, R.color.couleurImpaire, null)
@@ -38,5 +47,3 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 }
-
-

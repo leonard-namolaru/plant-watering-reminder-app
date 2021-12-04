@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ListePlantesRecycleAdapter (val listeDesPlantes: MutableList<Plante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ListePlantesRecycleAdapter (val listeDesPlantes: Array<TablePlante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     // Parametres du constructeur : la liste mutable detudiants, les couleurs couleurPaire, couleurImpair (en tant que Int)
 
     class VH(itemView: View) : RecyclerView.ViewHolder(itemView)
