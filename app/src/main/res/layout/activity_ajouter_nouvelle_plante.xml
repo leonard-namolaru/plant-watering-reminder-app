@@ -100,7 +100,7 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="127dp">
+        android:layout_height="200dp">
 
         <Spinner
             android:layout_width="121dp"
@@ -146,17 +146,17 @@
             android:layout_marginBottom="80dp"
             android:text="Ajouter" />
 
+        <Button
+            android:id="@+id/add"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="120dp"
+            android:onClick="ajouter"
+            android:text="Valider" />
     </RelativeLayout>
 
 
-    <Button
-        android:id="@+id/add"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_margin="120dp"
-        android:text="Valider"
-        android:onClick="ajouter"/>
 
 
 </LinearLayout>
