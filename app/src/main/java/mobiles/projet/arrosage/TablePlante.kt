@@ -3,7 +3,7 @@ import android.icu.util.Calendar
 import androidx.room.*
 
 @Entity
-data class PlanteBD (
+data class TablePlante (
     @PrimaryKey
     var idPlante : Int, // NOT NULL
     var nomCommun: String, // NOT NULL
