@@ -144,7 +144,8 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_margin="120dp"
-        android:text="Valider" />
+        android:text="Valider"
+        android:onClick="ajouter"/>
 
 
 </LinearLayout>
