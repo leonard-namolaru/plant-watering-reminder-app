@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetRappelsArrosage">
         <activity
+            android:name=".AffichePlante"
+            android:exported="false" />
+        <activity
             android:name=".ModifierDonnees"
             android:exported="true" />
         <activity

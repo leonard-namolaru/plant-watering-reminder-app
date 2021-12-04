@@ -38,6 +38,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
         var nomC: String?
         var nomL: String?
+        var lien : String?
         if(!binding.nomCommun.text.isNullOrBlank())
             nomC= binding.nomCommun.text.toString()
         else
@@ -48,23 +49,15 @@ class AjouterNouvellePlante : AppCompatActivity() {
         else
                 nomL = null // Si le TextView de nomLatin est vide alors insérer null comme NomLatin.
 
-        // Insertion
-            /**
-             * Cette activité permet d’ajouter un nouveau Pays dans la table des pays
-             */
-            data class PlanteBD (
-                @PrimaryKey
-                var idPlante : Int, // NOT NULL
-                var nomCommun: String, // NOT NULL
-                var nomLatin: String?,
-                var dateDernierArrosage: Calendar,
-                var lienPhotoDeLaPlante: String?
-            )
+        if(!binding.lienPic.text.isNullOrBlank())
+            lien = binding.lienPic.text.toString()
+        else
+            lien = null // Si le TextView de nomLatin est vide alors insérer null comme NomLatin.
 
 
-
+            // Insertion
         Thread {
-            bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat))
+            bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/))
 
             // Pour tester : récupérer toutes les plantes
             val lesPlantes: Array<TablePlante> = bd.loadAll()

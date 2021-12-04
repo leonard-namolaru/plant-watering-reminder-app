@@ -1,12 +1,18 @@
 package mobiles.projet.arrosage
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import mobiles.projet.arrosage.MainActivity
 
-class ListePlantesRecycleAdapter (val listeDesPlantes: Array<TablePlante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: Array<TablePlante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     // Parametres du constructeur : la liste mutable detudiants, les couleurs couleurPaire, couleurImpair (en tant que Int)
 
     class VH(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -19,6 +25,17 @@ class ListePlantesRecycleAdapter (val listeDesPlantes: Array<TablePlante>, val c
                 .inflate(R.layout.element_liste_plantes, parent, false)
 
         val holder: RecyclerView.ViewHolder = VH(v)
+
+        // Installer le meme listener sur chaqaue View
+        v.setOnClickListener( View.OnClickListener {
+            val plantePosition: Int = holder.absoluteAdapterPosition
+           val plante: TablePlante = listeDesPlantes[plantePosition]
+
+            val intent = Intent(context , AffichePlante::class.java)
+           context.startActivity(intent)
+
+        } )
+
         return holder // retourner le ViewHolder
     }
 
@@ -30,9 +47,9 @@ class ListePlantesRecycleAdapter (val listeDesPlantes: Array<TablePlante>, val c
          * holder.itemView cest la View associee a ce holder
          */
         val textViewPourNom: TextView = holder.itemView.findViewById(R.id.nom) as TextView
+        val imageViewPourPlante: ImageView = holder.itemView.findViewById(R.id.photoPlante) as ImageView
 
         textViewPourNom.text = listeDesPlantes[position].nomCommun
-
             if (position % 2 == 0)
                 holder.itemView.setBackgroundColor(couleurPaire)
             else

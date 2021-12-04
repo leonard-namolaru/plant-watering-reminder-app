@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         val couleurPaire: Int = ResourcesCompat.getColor(resources, R.color.couleurPaire, null)
         val couleurImpaire: Int = ResourcesCompat.getColor(resources, R.color.couleurImpaire, null)
 
-        var adapter: ListePlantesRecycleAdapter = ListePlantesRecycleAdapter(listeDesPlantes, couleurPaire, couleurImpaire)
+        var adapter: ListePlantesRecycleAdapter = ListePlantesRecycleAdapter( this@MainActivity , listeDesPlantes, couleurPaire, couleurImpaire)
         recyclerView.adapter = adapter
     }
 
