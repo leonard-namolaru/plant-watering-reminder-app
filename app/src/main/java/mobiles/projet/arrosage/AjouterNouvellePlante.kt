@@ -66,10 +66,10 @@ class AjouterNouvellePlante : AppCompatActivity() {
         Thread {
             bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat))
 
-            // Pour tester : récupérer tous les pays
-            val lesPays: Array<TablePlante> = bd.loadAll()
-            for(pays in lesPays)
-                Log.d("liste des pays", "${pays.pays}")
+            // Pour tester : récupérer toutes les plantes
+            val lesPlantes: Array<TablePlante> = bd.loadAll()
+            for(plante in lesPlantes)
+                Log.d("liste des pays", "${plante.nomCommun}")
 
         }.start()
 
