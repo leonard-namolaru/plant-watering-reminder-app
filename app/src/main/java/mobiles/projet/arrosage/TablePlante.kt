@@ -4,11 +4,11 @@ import androidx.room.*
 
 @Entity
 data class TablePlante (
-    @PrimaryKey
-    var idPlante : Int, // NOT NULL
+    @PrimaryKey(autoGenerate = true)
+    var idPlante : Int=0, // NOT NULL
     var nomCommun: String, // NOT NULL
     var nomLatin: String?,
-    var dateDernierArrosage: Calendar,
-    var lienPhotoDeLaPlante: String?
+   /* var dateDernierArrosage: Calendar,
+    var lienPhotoDeLaPlante: String? */
 )
 

@@ -18,57 +18,64 @@ class AjouterNouvellePlante : AppCompatActivity() {
         setContentView(R.layout.activity_ajouter_nouvelle_plante)
     }
 
-    /**
-     * Cette activité permet d’ajouter un nouveau Pays dans la table des pays
-     */
-    data class PlanteBD (
-        @PrimaryKey
-        var idPlante : Int, // NOT NULL
-        var nomCommun: String, // NOT NULL
-        var nomLatin: String?,
-        var dateDernierArrosage: Calendar,
-        var lienPhotoDeLaPlante: String?
-    )
+
 
         // Cette fonction me permet d'ajouter des plantes dans la base de données
         // C'est à dire on récupère les champs et on les mets dans la bd les champs
     fun ajouter(button: View){
         val bd = PlantesBD.getDatabase(application).myDao()
+         // Supprimer les espaces au début et à la fin de chaque valeur String
 
-            // Supprimer les espaces au début et à la fin de chaque valeur String
-         /*
-        var pays: String = binding.edPays.text.toString().trim()
-        var continent: String = binding.edContinent.text.toString().trim()
-        var capitale: String = binding.edCapitale.text.toString().trim()*/
+        var nomCom: String = binding.nomCommun.text.toString().trim()
+        var nomLat: String = binding.nomLatin.text.toString().trim()
+
 
         // Vérifier que les Strings obtenus ne soient pas vide
-        if(pays == "" || continent == "" || capitale == ""){
-            Toast.makeText(this, "Le nom de pays, continent ou capitale est vide", Toast.LENGTH_LONG).show()
+        if(nomCom == "" && nomLat == "" ){
+            Toast.makeText(this, "Vous devez mentioner un nom ", Toast.LENGTH_LONG).show()
             return
         }
 
-        var superficie: Int?
-        if(!binding.edSuperficie.text.isNullOrBlank())
-            superficie = binding.edSuperficie.text.toString().toInt()
+        var nomC: String?
+        var nomL: String?
+        if(!binding.nomCommun.text.isNullOrBlank())
+            nomC= binding.nomCommun.text.toString()
         else
-            superficie = null // Si le TextView de superficie est vide alors insérer null comme la superficie.
+            nomC= null // Si le TextView de nomCommun est vide alors insérer null comme la NomLatin.
+
+        if(!binding.nomLatin.text.isNullOrBlank())
+                nomL = binding.nomLatin.text.toString()
+        else
+                nomL = null // Si le TextView de nomLatin est vide alors insérer null comme NomLatin.
 
         // Insertion
+            /**
+             * Cette activité permet d’ajouter un nouveau Pays dans la table des pays
+             */
+            data class PlanteBD (
+                @PrimaryKey
+                var idPlante : Int, // NOT NULL
+                var nomCommun: String, // NOT NULL
+                var nomLatin: String?,
+                var dateDernierArrosage: Calendar,
+                var lienPhotoDeLaPlante: String?
+            )
+
+
+
         Thread {
-            bd.insertPays( Pays(pays = pays, continent = continent, capitale = capitale, superficie = superficie) )
+            bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat))
 
             // Pour tester : récupérer tous les pays
-            val lesPays: Array<Pays> = bd.loadAll()
+            val lesPays: Array<TablePlante> = bd.loadAll()
             for(pays in lesPays)
                 Log.d("liste des pays", "${pays.pays}")
 
         }.start()
 
         // Nettoyer tous les EditText
-        binding.edPays.text.clear()
-        binding.edContinent.text.clear()
-        binding.edCapitale.text.clear()
-        binding.edSuperficie.text.clear()
+        binding.nomCommun.text.clear()
+        binding.nomLatin.text.clear()
     }
 
 }
