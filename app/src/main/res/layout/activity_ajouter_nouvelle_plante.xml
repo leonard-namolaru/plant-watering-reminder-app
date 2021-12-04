@@ -32,8 +32,7 @@
         android:ems="10"
         android:hint="Nom commun"
         android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        />
+        android:paddingEnd="12dp" />
 
 
     <EditText
@@ -46,6 +45,18 @@
         android:hint="Nom latin"
         android:paddingStart="12dp"
         android:paddingEnd="12dp" />
+
+    <EditText
+        android:id="@+id/lienPic"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/custom_input"
+        android:ems="10"
+        android:hint="Liens vers la photo"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
+
 
 
     <RadioGroup
