@@ -15,7 +15,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAjouterNouvellePlanteBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_ajouter_nouvelle_plante)
+        setContentView(binding.root)
     }
 
 
@@ -69,7 +69,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
             // Pour tester : récupérer toutes les plantes
             val lesPlantes: Array<TablePlante> = bd.loadAll()
             for(plante in lesPlantes)
-                Log.d("liste des pays", "${plante.nomCommun}")
+                Log.d("liste des plantes", "${plante.nomCommun}")
 
         }.start()
 
