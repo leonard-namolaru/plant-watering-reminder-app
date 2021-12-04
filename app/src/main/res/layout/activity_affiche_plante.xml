@@ -16,12 +16,23 @@
         android:paddingBottom="4dp">
 
         <TextView
-            android:id="@+id/nom"
+            android:id="@+id/leNomCommun"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:tag="nom"
-            android:text="Nom de la plante"
+            android:tag="leNomCommun"
+            android:text=" "
+            android:textSize="@dimen/textSize"
+            android:paddingStart="10dp"
+            />
+
+        <TextView
+            android:id="@+id/leNomLatin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:tag="leNomLatin"
+            android:text=" "
             android:textSize="@dimen/textSize"
             android:paddingStart="10dp"
          />

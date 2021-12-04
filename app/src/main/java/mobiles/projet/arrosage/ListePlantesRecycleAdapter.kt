@@ -28,12 +28,13 @@ class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: 
 
         // Installer le meme listener sur chaqaue View
         v.setOnClickListener( View.OnClickListener {
-            val plantePosition: Int = holder.absoluteAdapterPosition
-           val plante: TablePlante = listeDesPlantes[plantePosition]
+           val plantePosition: Int = holder.absoluteAdapterPosition
+            val plante: TablePlante = listeDesPlantes[plantePosition]
 
             val intent = Intent(context , AffichePlante::class.java)
-           context.startActivity(intent)
-
+            intent.putExtra("nomCommun", plante.nomCommun)
+            intent.putExtra("nomLatin", plante.nomLatin)
+            context.startActivity(intent)
         } )
 
         return holder // retourner le ViewHolder
