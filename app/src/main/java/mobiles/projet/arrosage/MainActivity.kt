@@ -1,7 +1,9 @@
 package mobiles.projet.arrosage
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,4 +32,11 @@ class MainActivity : AppCompatActivity() {
         var adapter: ListePlantesRecycleAdapter = ListePlantesRecycleAdapter(listeDesPlantes, couleurPaire, couleurImpaire)
         recyclerView.adapter = adapter
     }
+
+    fun ajouterPlante(view: View) {
+        val intent = Intent(this, AjouterNouvellePlante::class.java)
+        startActivity(intent)
+    }
 }
+
+

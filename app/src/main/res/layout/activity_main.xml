@@ -17,4 +17,11 @@
         android:layout_marginBottom="30dp"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ajouter plante"
+        android:id="@+id/ajouter"
+        android:onClick="ajouterPlante" />
+
 </RelativeLayout>
