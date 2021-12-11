@@ -8,8 +8,8 @@ data class Frequence(
  @PrimaryKey
  var IdPlante : Int,
  var IdFrequence : Int,
- var dateDebut : Long,
- var dateFin : Long,
+ var dateDebut : String,
+ var dateFin : String,
  var nbFois :  Int,
  var Frequence : String
 

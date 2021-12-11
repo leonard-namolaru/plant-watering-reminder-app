@@ -8,6 +8,7 @@ import mobiles.projet.arrosage.databinding.ActivityAjouterNouvellePlanteBinding
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.text.isDigitsOnly
 
 class AjouterNouvellePlante : AppCompatActivity() {
     private lateinit var binding: ActivityAjouterNouvellePlanteBinding
@@ -41,7 +42,41 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
         var nomCom: String = binding.nomCommun.text.toString().trim()
         var nomLat: String = binding.nomLatin.text.toString().trim()
-        var dateDebutFreq1 = binding.freq1.text.toString().trim()
+        var dateDebutFreq1 :String = binding.dateDebutFreq1.toString().trim()
+        var dateFinFreq1 = binding.dateFinFreq1.toString().trim()
+
+        var dateDebutFreq2 :String = binding.dateDebutFreq2.toString().trim()
+        var dateFinFreq2 = binding.dateFinFreq2.toString().trim()
+
+        var dateDebutFreq3 :String = binding.dateDebutFreq3.toString().trim()
+        var dateFinFreq3 = binding.dateFinFreq3.toString().trim()
+
+        var freq1: String = binding.freq1.text.toString().trim()
+        var freq2: String = binding.freq2.text.toString().trim()
+        var freq3 : String = binding.freq3.text.toString().trim()
+
+
+
+        if(!binding.freq1.text.isNullOrBlank()){
+            if(!freq1.isDigitsOnly()){
+                Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
+                return
+            }
+
+        }
+        if(!binding.freq2.text.isNullOrBlank()){
+            if(!freq1.isDigitsOnly()){
+                    Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
+                    return
+                }
+            }
+        if(!binding.freq3.text.isNullOrBlank()){
+            if(!freq1.isDigitsOnly()){
+                    Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
+                    return
+                }
+            }
+
 
 
         // Vérifier que les Strings obtenus ne soient pas vide
