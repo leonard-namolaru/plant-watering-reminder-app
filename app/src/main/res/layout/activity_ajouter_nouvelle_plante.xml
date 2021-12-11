@@ -133,6 +133,11 @@
             android:hint="Fréquence"
             android:paddingStart="12dp"
             android:paddingEnd="12dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="200dp">
 
         <Spinner
             android:layout_width="121dp"
@@ -165,6 +170,11 @@
             android:hint="Fréquence"
             android:paddingStart="12dp"
             android:paddingEnd="12dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="200dp">
 
         <Spinner
             android:layout_width="121dp"
@@ -198,6 +208,7 @@
             android:paddingStart="12dp"
             android:paddingEnd="12dp" />
 
+
         <Button
             android:id="@+id/add"
             android:layout_width="100dp"
@@ -207,6 +218,11 @@
             android:onClick="valider"
             android:text="Valider" />
     </RelativeLayout>
+
+
+
+
+
 
 
 
