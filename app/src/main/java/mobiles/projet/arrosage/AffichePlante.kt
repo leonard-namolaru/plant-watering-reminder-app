@@ -1,7 +1,9 @@
 package mobiles.projet.arrosage
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import mobiles.projet.arrosage.databinding.ActivityAffichePlanteBinding
 
 class AffichePlante : AppCompatActivity() {
@@ -21,6 +23,12 @@ class AffichePlante : AppCompatActivity() {
         if (nomLatin != null) binding.leNomLatin.text = nomLatin
 
     }
+
+    fun getListePlantes(view: View) {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
 
 
 }
