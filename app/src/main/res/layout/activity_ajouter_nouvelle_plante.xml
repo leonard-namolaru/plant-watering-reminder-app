@@ -124,27 +124,26 @@
 
         <EditText
             android:id="@+id/freq1"
-            android:layout_width="120dp"
+            android:layout_width="160dp"
             android:layout_height="35dp"
             android:layout_marginStart="230dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/custom_input"
             android:ems="10"
-            android:hint="Fréquence"
+            android:hint="Fréquence/Jour"
             android:paddingStart="12dp"
             android:paddingEnd="12dp" />
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="200dp">
+
+
+
 
         <Spinner
             android:layout_width="121dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="60dp"
             android:layout_marginBottom="20dp"
             android:entries="@array/mois" />
 
@@ -153,71 +152,73 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="120dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="160dp"
             android:layout_marginRight="2dp"
             android:layout_marginBottom="120dp"
             android:entries="@array/mois" />
 
         <EditText
             android:id="@+id/freq2"
-            android:layout_width="120dp"
+            android:layout_width="160dp"
             android:layout_height="35dp"
             android:layout_marginStart="230dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="52dp"
             android:background="@drawable/custom_input"
             android:ems="10"
-            android:hint="Fréquence"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp" />
-    </RelativeLayout>
+            android:hint="Fréquence/jour"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="200dp">
+
+
+
 
         <Spinner
             android:layout_width="121dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="100dp"
             android:layout_marginBottom="20dp"
             android:entries="@array/mois" />
 
         <Spinner
-            android:layout_width="121dp"
+            android:layout_width="131dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="120dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="200dp"
             android:layout_marginRight="2dp"
             android:layout_marginBottom="120dp"
             android:entries="@array/mois" />
 
         <EditText
             android:id="@+id/freq3"
-            android:layout_width="120dp"
+            android:layout_width="160dp"
             android:layout_height="35dp"
             android:layout_marginStart="230dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="90dp"
             android:background="@drawable/custom_input"
             android:ems="10"
-            android:hint="Fréquence"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp" />
-
+            android:hint="Fréquence/jour"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
 
         <Button
             android:id="@+id/add"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:layout_marginStart="290dp"
             android:layout_margin="120dp"
             android:onClick="valider"
             android:text="Valider" />
+
     </RelativeLayout>
+
+
 
 
 
