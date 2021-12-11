@@ -20,11 +20,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
 
 
-    fun ajouter(button: View){
-        val bd = PlantesBD.getDatabase(application).myDao()
-        // Ajouter une nouvelle fréquence
 
-    }
 
 
 
@@ -45,6 +41,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
         var nomCom: String = binding.nomCommun.text.toString().trim()
         var nomLat: String = binding.nomLatin.text.toString().trim()
+        var dateDebutFreq1 = binding.freq1.text.toString().trim()
 
 
         // Vérifier que les Strings obtenus ne soient pas vide

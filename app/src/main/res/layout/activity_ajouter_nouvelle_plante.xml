@@ -103,6 +103,7 @@
         android:layout_height="200dp">
 
         <Spinner
+
             android:layout_width="121dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
