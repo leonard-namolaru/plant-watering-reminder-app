@@ -32,6 +32,7 @@ class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: 
             val plante: TablePlante = listeDesPlantes[plantePosition]
 
             val intent = Intent(context , AffichePlante::class.java)
+            intent.putExtra("id", plante.idPlante)
             intent.putExtra("nomCommun", plante.nomCommun)
             intent.putExtra("nomLatin", plante.nomLatin)
             context.startActivity(intent)

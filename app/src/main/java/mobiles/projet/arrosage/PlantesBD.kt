@@ -6,11 +6,6 @@ import androidx.room.*
 /**
  * Une classe PlantesBD pour définir la base de données.
  */
-
-
-
-
-
 @Database(entities = [TablePlante::class, Frequence::class], version = 1) // version : The database version.
 @TypeConverters(Converters::class)
 abstract class PlantesBD : RoomDatabase() { // Une classe pour representer la base de données
