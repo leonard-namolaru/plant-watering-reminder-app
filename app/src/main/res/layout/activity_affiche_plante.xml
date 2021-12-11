@@ -4,10 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/couleurPaire"
     tools:context=".AffichePlante">
 
     <LinearLayout
         android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp">
+
+        <ImageView
+            android:id="@+id/photoPlante"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/ic_launcher_foreground"
+            android:contentDescription="description"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linear_layout_horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
@@ -17,24 +37,25 @@
 
         <TextView
             android:id="@+id/leNomCommun"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:tag="leNomCommun"
             android:text=" "
-            android:textSize="@dimen/textSize"
-            android:paddingStart="10dp"
+            android:textSize="36sp"
+            android:textStyle="bold"
             />
-
         <TextView
             android:id="@+id/leNomLatin"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:tag="leNomLatin"
             android:text=" "
             android:textSize="@dimen/textSize"
-            android:paddingStart="10dp"
-         />
+            android:textStyle="italic"
+            />
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
