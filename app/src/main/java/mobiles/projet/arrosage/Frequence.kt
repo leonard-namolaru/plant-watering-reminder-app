@@ -5,9 +5,9 @@ import java.time.LocalDate
 
 @Entity
 data class Frequence(
- @PrimaryKey
+ @PrimaryKey(autoGenerate = true)
+ var IdFrequence : Int=0,
  //var IdPlante : Int,
- //var IdFrequence : Int,
  var dateDebut : String,
  var dateFin : String,
  var nbFois :  Int,
