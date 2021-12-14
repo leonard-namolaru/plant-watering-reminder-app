@@ -57,8 +57,6 @@ class AjouterNouvellePlante : AppCompatActivity() {
             var freq2: String = binding.freq2.text.toString().trim()
             var freq3 : String = binding.freq3.text.toString().trim()
 
-            Log.d("freq1", freq1)
-
 
              // Vérifier que les Strings obtenus ne soient pas vide
              if(nomCom == "" && nomLat == "" ){
@@ -66,54 +64,44 @@ class AjouterNouvellePlante : AppCompatActivity() {
                   return
              }
 
-        var nomC: String?
-        var nomL: String?
-        var lien : String?
-        if(!binding.nomCommun.text.isNullOrBlank())
-            nomC= binding.nomCommun.text.toString()
-        else
-            nomC= null // Si le TextView de nomCommun est vide alors insérer null comme la NomLatin.
+            var nomC: String?
+            var nomL: String?
+            var lien : String?
+            if(!binding.nomCommun.text.isNullOrBlank())
+                nomC= binding.nomCommun.text.toString()
+            else
+                nomC= null // Si le TextView de nomCommun est vide alors insérer null comme la NomLatin.
 
-        if(!binding.nomLatin.text.isNullOrBlank())
+            if(!binding.nomLatin.text.isNullOrBlank())
                 nomL = binding.nomLatin.text.toString()
-        else
+            else
                 nomL = null // Si le TextView de nomLatin est vide alors insérer null comme NomLatin.
 
-        if(!binding.lienPic.text.isNullOrBlank())
-            lien = binding.lienPic.text.toString()
-        else
-            lien = null // Si le TextView de nomLatin est vide alors insérer null comme NomLatin.
+            if(!binding.lienPic.text.isNullOrBlank())
+                lien = binding.lienPic.text.toString()
+            else
+                lien = null // Si le TextView de nomLatin est vide alors insérer null comme NomLatin.
 
-        var idPlanteDansBDD : Int = 0
+            var idPlanteDansBDD : Int = 0
 
             // Insertion
-        var t = Thread {
+            var t = Thread {
                 bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/))
 
             val lesPlantes: Array<TablePlante> = bd.loadAll() // Récupérer toutes les plantes
             idPlanteDansBDD = lesPlantes.last().idPlante;
             }
-        t.start()
-        t.join();
-
-            Log.d("time1", nomCom)
-
+            t.start()
+            t.join();
 
             if(freq1.isNotBlank()) {
-                Log.d("time2", nomCom)
 
                 if(!freq1.isDigitsOnly()){ // c'est pas vide et ça contient des caractères
-                    Log.d("time3", nomCom)
-
                     Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
                     return
                 }else{  // Ça contient que des digit on peut mettre dans la BD
 
-                    Log.d("idPlanteDansBDD", idPlanteDansBDD.toString())
-                    Log.d("freq1", freq1)
-
                     var t1 = Thread {
-                        Log.d("time4", nomCom)
                         bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = freq1 ))
                     }
                     t1.start()
@@ -121,7 +109,6 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
                 }
             }
-            Log.d("time5", nomCom)
 
             if(freq2.isNotBlank()) {
                 if(!freq1.isDigitsOnly()){ // c'est pas vide et ça contient des caractères
@@ -130,12 +117,10 @@ class AjouterNouvellePlante : AppCompatActivity() {
                 }else{  // Ça contient que des digit on peut mettre dans la BD
 
                     var t2 = Thread {
-                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = dateDebutFreq2, dateFin = dateFinFreq2, nbFois = freq2))
+                    bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = dateDebutFreq2, dateFin = dateFinFreq2, nbFois = freq2))
                     }
                     t2.start()
                     t2.join();
-
-
                 }
             }
 
@@ -146,25 +131,20 @@ class AjouterNouvellePlante : AppCompatActivity() {
                 }else{  // Ça contient que des digit on peut mettre dans la BD
 
                     var t3 = Thread {
-                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = dateDebutFreq3, dateFin = dateFinFreq3 , nbFois = freq3 ))
-
+                    bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = dateDebutFreq3, dateFin = dateFinFreq3 , nbFois = freq3 ))
                     }
                     t3.start()
                     t3.join();
 
-
-
                 }
             }
 
-
-
             // Nettoyer tous les EditText
-        binding.nomCommun.text.clear()
-        binding.nomLatin.text.clear()
-        binding.freq1.text.clear()
-        binding.freq2.text.clear()
-        binding.freq3.text.clear()
+            binding.nomCommun.text.clear()
+            binding.nomLatin.text.clear()
+            binding.freq1.text.clear()
+            binding.freq2.text.clear()
+            binding.freq3.text.clear()
 
     }
 
