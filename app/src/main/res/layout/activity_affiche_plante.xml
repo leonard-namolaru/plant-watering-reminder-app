@@ -8,47 +8,18 @@
     tools:context=".AffichePlante">
 
     <LinearLayout
-        android:id="@+id/linear_layout"
+        android:id="@+id/linear_layout_vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="5dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="4dp">
-
-        <ImageView
-            android:id="@+id/photoPlante"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_foreground"
-            android:contentDescription="description"
-            android:paddingTop="25dp"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="La liste des plantes"
-            android:id="@+id/getListe"
-            android:onClick="getListePlantes" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/linear_layout_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_margin="5dp"
-        android:paddingTop="8dp"
+        android:paddingTop="1dp"
         android:paddingBottom="4dp">
 
         <TextView
             android:id="@+id/leNomCommun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:tag="leNomCommun"
             android:text=" "
             android:textSize="36sp"
@@ -58,21 +29,38 @@
             android:id="@+id/leNomLatin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:tag="leNomLatin"
             android:text=" "
             android:textSize="@dimen/textSize"
             android:textStyle="italic"
             />
 
+
+        <ImageView
+            android:id="@+id/photoPlante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_foreground"
+            android:contentDescription="description"
+            android:paddingTop="5dp"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="5dp"
             android:scrollbars="vertical"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="5dp"
             />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="La liste des plantes"
+            android:id="@+id/getListe"
+            android:onClick="getListePlantes" />
+
     </LinearLayout>
 
 
