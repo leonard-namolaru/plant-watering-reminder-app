@@ -17,4 +17,10 @@ interface MyDao {
     fun loadAll(): Array<TablePlante> // La fonction qui exécute select retourne un Array d'objets Pays
     @Query("SELECT * FROM Frequence")
     fun loadallFrequences(): Array<Frequence>
+
+    /**
+     * La méthode loadFrequencesById(id) retourne un Array<Frequence> avec tous les frequences d'une plante
+     */
+    @Query("SELECT * FROM Frequence WHERE IdPlante == :id ")
+    fun loadFrequencesById(id: Int): Array<Frequence> // Requête paramétrée : dans la requete le nom de paramètre de la fonction précédé par :
 }
