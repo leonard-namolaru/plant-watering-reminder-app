@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 import mobiles.projet.arrosage.databinding.ActivityAjouterNouvellePlanteBinding
 import android.util.Log
 import android.view.View
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.text.isDigitsOnly
 
@@ -23,32 +24,47 @@ class AjouterNouvellePlante : AppCompatActivity() {
         // C'est à dire on récupère les champs et on les mets dans la bd les champs
         fun valider(button: View){
 
-               val bd = PlantesBD.getDatabase(application).myDao()  // Supprimer les espaces au début et à la fin de chaque valeur String
+            val bd = PlantesBD.getDatabase(application).myDao()  // Supprimer les espaces au début et à la fin de chaque valeur String
+            var nomCom: String = binding.nomCommun.text.toString().trim()
+            var nomLat: String = binding.nomLatin.text.toString().trim()
 
-               var nomCom: String = binding.nomCommun.text.toString().trim()
-               var nomLat: String = binding.nomLatin.text.toString().trim()
 
-               var dateDebutFreq1 :String = binding.dateDebutFreq1.toString().trim()
-               var dateFinFreq1 = binding.dateFinFreq1.toString().trim()
 
-               var dateDebutFreq2 :String = binding.dateDebutFreq2.toString().trim()
-               var dateFinFreq2 = binding.dateFinFreq2.toString().trim()
+            // Spinner 1 : date début et date de fin
+            var spinner1 :Spinner = findViewById(R.id.dateDebutFreq1);
+            var dateDebutFreq1 : String = spinner1.selectedItem.toString().trim();
+            var spinner2 :Spinner = findViewById(R.id.dateFinFreq1);
+            var dateFinFreq1 : String = spinner2.selectedItem.toString().trim();
 
-               var dateDebutFreq3 :String = binding.dateDebutFreq3.toString().trim()
-               var dateFinFreq3 = binding.dateFinFreq3.toString().trim()
 
-               var freq1: String = binding.freq1.text.toString().trim()
-               var freq2: String = binding.freq2.text.toString().trim()
-               var freq3 : String = binding.freq3.text.toString().trim()
+
+            // Spinner 2 : date début et date de fin
+            var spinner3 :Spinner = findViewById(R.id.dateDebutFreq2);
+            var dateDebutFreq2 : String = spinner3.selectedItem.toString().trim();
+            var spinner4 :Spinner = findViewById(R.id.dateFinFreq2);
+            var dateFinFreq2: String = spinner4.selectedItem.toString().trim();
+
+
+            // Spinner 3 : date début et date de fin
+            var spinner5 :Spinner = findViewById(R.id.dateDebutFreq3);
+            var dateDebutFreq3: String = spinner5.selectedItem.toString().trim();
+            var spinner6 :Spinner = findViewById(R.id.dateFinFreq1);
+            var dateFinFreq3 : String = spinner6.selectedItem.toString().trim();
+
+
+            // Les fréquences des trois spinner
+            var freq1: String = binding.freq1.text.toString().trim()
+            var freq2: String = binding.freq2.text.toString().trim()
+            var freq3 : String = binding.freq3.text.toString().trim()
 
             Log.d("freq1", freq1)
 
 
-        // Vérifier que les Strings obtenus ne soient pas vide
-        if(nomCom == "" && nomLat == "" ){
-            Toast.makeText(this, "Vous devez mentioner un nom ", Toast.LENGTH_LONG).show()
-            return
-        }
+             // Vérifier que les Strings obtenus ne soient pas vide
+             if(nomCom == "" && nomLat == "" ){
+                  Toast.makeText(this, "Vous devez mentioner un nom ", Toast.LENGTH_LONG).show()
+                  return
+             }
 
         var nomC: String?
         var nomL: String?
@@ -98,7 +114,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
                     var t1 = Thread {
                         Log.d("time4", nomCom)
-                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = "janvier", dateFin = "septembre" , nbFois = freq1 ))
+                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = freq1 ))
                     }
                     t1.start()
                     t1.join();
@@ -114,7 +130,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
                 }else{  // Ça contient que des digit on peut mettre dans la BD
 
                     var t2 = Thread {
-                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = "octobre", dateFin = "novembre" , nbFois = freq2))
+                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = dateDebutFreq2, dateFin = dateFinFreq2, nbFois = freq2))
                     }
                     t2.start()
                     t2.join();
@@ -130,7 +146,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
                 }else{  // Ça contient que des digit on peut mettre dans la BD
 
                     var t3 = Thread {
-                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = "novembre", dateFin = "decembre" , nbFois = freq3 ))
+                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = dateDebutFreq3, dateFin = dateFinFreq3 , nbFois = freq3 ))
 
                     }
                     t3.start()
