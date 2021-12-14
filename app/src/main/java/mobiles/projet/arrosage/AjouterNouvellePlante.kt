@@ -74,9 +74,8 @@ class AjouterNouvellePlante : AppCompatActivity() {
         var t = Thread {
                 bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/))
 
-                // Récupérer toutes les plantes
-                val lesPlantes: Array<TablePlante> = bd.loadAll()
-                idPlanteDansBDD = lesPlantes.last().idPlante;
+            val lesPlantes: Array<TablePlante> = bd.loadAll() // Récupérer toutes les plantes
+            idPlanteDansBDD = lesPlantes.last().idPlante;
             }
         t.start()
         t.join();
@@ -92,12 +91,6 @@ class AjouterNouvellePlante : AppCompatActivity() {
                     // Insertion Des fréquences
                     Thread {
                         bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f1 ))
-
-                        // Pour tester : récupérer toutes les plantes
-                        val lesPlantes: Array<TablePlante> = bd.loadAll()
-                        for(plante in lesPlantes)
-                         Log.d("liste des pays", "${plante.nomCommun}")
-
                     }.start()
 
 
@@ -116,17 +109,6 @@ class AjouterNouvellePlante : AppCompatActivity() {
                     //
                     Thread {
                         bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f2))
-
-                        // Pour tester : récupérer toutes les plantes
-                        val lesFrequences: Array<Frequence> = bd.loadallFrequences()
-                        for(frequence in lesFrequences){
-                            Log.d("DATE DEBUT ", "${frequence.dateDebut}")
-                            Log.d("DATE FIN ", "${frequence.dateFin}")
-                            Log.d("FREQUENCE ", "${frequence.nbFois}")
-                        }
-
-
-
                     }.start()
 
 
@@ -144,18 +126,23 @@ class AjouterNouvellePlante : AppCompatActivity() {
                     Thread {
                         bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f3 ))
 
-                        // Pour tester : récupérer toutes les plantes
-                        val lesPlantes: Array<TablePlante> = bd.loadAll()
-                        for(plante in lesPlantes)
-                            Log.d("test plante", "${plante.nomCommun}")
-
                     }.start()
 
 
                 }
             }
 
-        // Nettoyer tous les EditText
+            // Pour tester : récupérer toutes les frequences pour notre plante
+            val lesFrequences: Array<Frequence> = bd.loadFrequencesById(idPlanteDansBDD)
+            for(frequence in lesFrequences){
+                Log.d("Frequence dateDebut", frequence.dateDebut);
+                Log.d("Frequence dateFin", frequence.dateFin);
+                Log.d("Frequence nbFois", frequence.nbFois.toString());
+                Log.d("Frequence IdFrequence", frequence.IdFrequence.toString());
+                Log.d("Frequence IdPlante", frequence.IdPlante.toString());
+            }
+
+            // Nettoyer tous les EditText
         binding.nomCommun.text.clear()
         binding.nomLatin.text.clear()
         binding.freq1.text.clear()
