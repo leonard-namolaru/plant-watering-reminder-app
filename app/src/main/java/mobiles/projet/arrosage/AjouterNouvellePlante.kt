@@ -41,6 +41,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
                var freq2: String = binding.freq2.text.toString().trim()
                var freq3 : String = binding.freq3.text.toString().trim()
 
+            Log.d("freq1", freq1)
 
 
         // Vérifier que les Strings obtenus ne soient pas vide
@@ -79,57 +80,67 @@ class AjouterNouvellePlante : AppCompatActivity() {
         t.start()
         t.join();
 
+            Log.d("time1", nomCom)
 
 
-            if(!freq1.isNotBlank()) {
+            if(freq1.isNotBlank()) {
+                Log.d("time2", nomCom)
+
+                if(!freq1.isDigitsOnly()){ // c'est pas vide et ça contient des caractères
+                    Log.d("time3", nomCom)
+
+                    Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
+                    return
+                }else{  // Ça contient que des digit on peut mettre dans la BD
+
+                    Log.d("idPlanteDansBDD", idPlanteDansBDD.toString())
+                    Log.d("freq1", freq1)
+
+                    var t1 = Thread {
+                        Log.d("time4", nomCom)
+                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = "janvier", dateFin = "septembre" , nbFois = freq1 ))
+                    }
+                    t1.start()
+                    t1.join();
+
+                }
+            }
+            Log.d("time5", nomCom)
+
+            if(freq2.isNotBlank()) {
                 if(!freq1.isDigitsOnly()){ // c'est pas vide et ça contient des caractères
                     Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
                     return
                 }else{  // Ça contient que des digit on peut mettre dans la BD
 
+                    var t2 = Thread {
+                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = "octobre", dateFin = "novembre" , nbFois = freq2))
+                    }
+                    t2.start()
+                    t2.join();
 
-                    Thread {
-                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = freq1 ))
-                    }.start()
+
+                }
+            }
+
+            if(freq3.isNotBlank()) {
+                if(!freq1.isDigitsOnly()){ // c'est pas vide et ça contient des caractères
+                    Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
+                    return
+                }else{  // Ça contient que des digit on peut mettre dans la BD
+
+                    var t3 = Thread {
+                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut = "novembre", dateFin = "decembre" , nbFois = freq3 ))
+
+                    }
+                    t3.start()
+                    t3.join();
 
 
 
                 }
             }
 
-            if(!freq2.isNotBlank()) {
-                if(!freq1.isDigitsOnly()){ // c'est pas vide et ça contient des caractères
-                    Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
-                    return
-                }else{  // Ça contient que des digit on peut mettre dans la BD
-
-                    Thread {
-                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = freq2))
-                    }.start()
-
-
-                }
-            }
-
-            if(!freq3.isNotBlank()) {
-                if(!freq1.isDigitsOnly()){ // c'est pas vide et ça contient des caractères
-                    Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
-                    return
-                }else{  // Ça contient que des digit on peut mettre dans la BD
-
-                    Thread {
-                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = freq3 ))
-
-                    }.start()
-
-
-                }
-            }
-
-            Log.d("idPlanteDansBDD", idPlanteDansBDD.toString());
-            Log.d("dateDebutFreq1", dateDebutFreq1);
-            Log.d("dateFinFreq1", dateFinFreq1);
-            Log.d("binding.freq1", binding.freq1.text.toString().trim());
 
 
             // Nettoyer tous les EditText

@@ -3,6 +3,7 @@ package mobiles.projet.arrosage
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
@@ -32,13 +33,26 @@ class AffichePlante : AppCompatActivity() {
         recyclerView.hasFixedSize() /* pour améliorer les pérformances*/
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+
         if(planteId != null) {
             // BDD
             val bd = PlantesBD.getDatabase(application)
             var listeDesFrequences : Array<Frequence> = arrayOf() // Le Array de frequences à afficher dans RecyclerView
-            val t = Thread{ listeDesFrequences = bd.myDao().loadFrequencesById(planteId) }
+            val t = Thread{
+                listeDesFrequences = bd.myDao().loadFrequencesById(planteId)
+
+            }
             t.start()
             t.join()
+
+            for(frequence in listeDesFrequences) {
+                Log.d("IdPlante", frequence.IdPlante.toString())
+                Log.d("IdFrequence", frequence.IdFrequence.toString())
+                Log.d("dateDebut", frequence.dateDebut)
+                Log.d("dateFin", frequence.dateFin)
+                Log.d("nbFois", frequence.nbFois)
+            }
+
 
             val couleurPaire: Int = ResourcesCompat.getColor(resources, R.color.couleurPaire, null)
             val couleurImpaire: Int = ResourcesCompat.getColor(resources, R.color.couleurImpaire, null)
