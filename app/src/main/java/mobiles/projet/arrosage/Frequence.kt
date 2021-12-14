@@ -7,7 +7,7 @@ import java.time.LocalDate
 data class Frequence(
  @PrimaryKey(autoGenerate = true)
  var IdFrequence : Int=0,
- //var IdPlante : Int,
+ var IdPlante : Int,
  var dateDebut : String,
  var dateFin : String,
  var nbFois :  Int,

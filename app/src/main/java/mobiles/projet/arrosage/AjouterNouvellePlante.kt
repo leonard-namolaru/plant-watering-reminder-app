@@ -19,21 +19,6 @@ class AjouterNouvellePlante : AppCompatActivity() {
          setContentView(binding.root)
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // Cette fonction me permet d'ajouter des plantes dans la base de données
         // C'est à dire on récupère les champs et on les mets dans la bd les champs
         fun valider(button: View){
@@ -60,10 +45,6 @@ class AjouterNouvellePlante : AppCompatActivity() {
                var f2 : Int?
                var f3 : Int?
 
-
-
-
-
         // Vérifier que les Strings obtenus ne soient pas vide
         if(nomCom == "" && nomLat == "" ){
             Toast.makeText(this, "Vous devez mentioner un nom ", Toast.LENGTH_LONG).show()
@@ -88,6 +69,17 @@ class AjouterNouvellePlante : AppCompatActivity() {
         else
             lien = null // Si le TextView de nomLatin est vide alors insérer null comme NomLatin.
 
+        var idPlanteDansBDD : Int = 0
+        // Insertion
+        var t = Thread {
+                bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/))
+
+                // Récupérer toutes les plantes
+                val lesPlantes: Array<TablePlante> = bd.loadAll()
+                idPlanteDansBDD = lesPlantes.last().idPlante;
+            }
+        t.start()
+        t.join();
 
 
             if(!freq1.isNullOrBlank()) {
@@ -98,9 +90,8 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
                     f1=freq1.toInt()
                     // Insertion Des fréquences
-                    //
                     Thread {
-                        bd.insertFrequence( Frequence( dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f1 ))
+                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f1 ))
 
                         // Pour tester : récupérer toutes les plantes
                         val lesPlantes: Array<TablePlante> = bd.loadAll()
@@ -124,7 +115,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
                     // Insertion Des fréquences
                     //
                     Thread {
-                        bd.insertFrequence( Frequence( dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f2))
+                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f2))
 
                         // Pour tester : récupérer toutes les plantes
                         val lesFrequences: Array<Frequence> = bd.loadallFrequences()
@@ -142,11 +133,6 @@ class AjouterNouvellePlante : AppCompatActivity() {
                 }
             }
 
-
-
-
-
-
             if(!freq3.isNotBlank()) {
                 if(!freq1.isDigitsOnly()){ // c'est pas vide et ça contient des caractères
                     Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
@@ -156,54 +142,18 @@ class AjouterNouvellePlante : AppCompatActivity() {
                     // Insertion Des fréquences
                     //
                     Thread {
-                        bd.insertFrequence( Frequence( dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f3 ))
+                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f3 ))
 
                         // Pour tester : récupérer toutes les plantes
                         val lesPlantes: Array<TablePlante> = bd.loadAll()
                         for(plante in lesPlantes)
-                            Log.d("liste des pays", "${plante.nomCommun}")
+                            Log.d("test plante", "${plante.nomCommun}")
 
                     }.start()
 
 
                 }
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // Insertion
-        Thread {
-            bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/))
-
-            // Pour tester : récupérer toutes les plantes
-            val lesPlantes: Array<TablePlante> = bd.loadAll()
-            for(plante in lesPlantes)
-                Log.d("liste des pays", "${plante.nomCommun}")
-
-        }.start()
-
-
-
-
-
-
-
-
-
-
-
 
         // Nettoyer tous les EditText
         binding.nomCommun.text.clear()
@@ -215,8 +165,3 @@ class AjouterNouvellePlante : AppCompatActivity() {
     }
 
 }
-
-
-
-
-
