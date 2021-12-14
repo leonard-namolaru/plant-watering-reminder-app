@@ -68,11 +68,6 @@ class AjouterNouvellePlante : AppCompatActivity() {
             lien = null // Si le TextView de nomLatin est vide alors insérer null comme NomLatin.
 
         var idPlanteDansBDD : Int = 0
-            Log.d("idPlanteDansBDD", idPlanteDansBDD.toString());
-            Log.d("dateDebutFreq1", dateDebutFreq1);
-            Log.d("dateFinFreq1", dateFinFreq1);
-            Log.d("dateFinFreq1", dateFinFreq1);
-            Log.d("binding.freq1", binding.freq1.text.toString().trim());
 
             // Insertion
         var t = Thread {
@@ -131,12 +126,11 @@ class AjouterNouvellePlante : AppCompatActivity() {
                 }
             }
 
-            // Pour tester : récupérer toutes les frequences pour notre plante
-            val lesFrequences: Array<Frequence> = bd.loadFrequencesById(idPlanteDansBDD)
-            for(frequence in lesFrequences){
-                Log.d("Frequence dateDebut", frequence.dateDebut);
+            Log.d("idPlanteDansBDD", idPlanteDansBDD.toString());
+            Log.d("dateDebutFreq1", dateDebutFreq1);
+            Log.d("dateFinFreq1", dateFinFreq1);
+            Log.d("binding.freq1", binding.freq1.text.toString().trim());
 
-            }
 
             // Nettoyer tous les EditText
         binding.nomCommun.text.clear()
