@@ -41,9 +41,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
                var freq2: String = binding.freq2.text.toString().trim()
                var freq3 : String = binding.freq3.text.toString().trim()
 
-               var f1 : Int?
-               var f2 : Int?
-               var f3 : Int?
+
 
         // Vérifier que les Strings obtenus ne soient pas vide
         if(nomCom == "" && nomLat == "" ){
@@ -88,16 +86,15 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
 
 
-            if(!freq1.isNullOrBlank()) {
+            if(!freq1.isNotBlank()) {
                 if(!freq1.isDigitsOnly()){ // c'est pas vide et ça contient des caractères
                     Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
                     return
                 }else{  // Ça contient que des digit on peut mettre dans la BD
 
-                    f1=freq1.toInt()
-                    // Insertion Des fréquences
+
                     Thread {
-                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f1 ))
+                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = freq1 ))
                     }.start()
 
 
@@ -110,12 +107,9 @@ class AjouterNouvellePlante : AppCompatActivity() {
                     Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
                     return
                 }else{  // Ça contient que des digit on peut mettre dans la BD
-                    f2=freq2.toInt()
 
-                    // Insertion Des fréquences
-                    //
                     Thread {
-                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f2))
+                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = freq2))
                     }.start()
 
 
@@ -127,11 +121,9 @@ class AjouterNouvellePlante : AppCompatActivity() {
                     Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
                     return
                 }else{  // Ça contient que des digit on peut mettre dans la BD
-                    f3=freq3.toInt()
-                    // Insertion Des fréquences
-                    //
+
                     Thread {
-                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f3 ))
+                        bd.insertFrequence( Frequence( IdPlante = idPlanteDansBDD, dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = freq3 ))
 
                     }.start()
 
@@ -143,10 +135,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
             val lesFrequences: Array<Frequence> = bd.loadFrequencesById(idPlanteDansBDD)
             for(frequence in lesFrequences){
                 Log.d("Frequence dateDebut", frequence.dateDebut);
-                Log.d("Frequence dateFin", frequence.dateFin);
-                Log.d("Frequence nbFois", frequence.nbFois.toString());
-                Log.d("Frequence IdFrequence", frequence.IdFrequence.toString());
-                Log.d("Frequence IdPlante", frequence.IdPlante.toString());
+
             }
 
             // Nettoyer tous les EditText

@@ -10,7 +10,7 @@ data class Frequence(
  var IdPlante : Int,
  var dateDebut : String,
  var dateFin : String,
- var nbFois :  Int,
+ var nbFois :  String,
 // var Frequence : String
 
 
