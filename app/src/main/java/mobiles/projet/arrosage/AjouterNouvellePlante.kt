@@ -36,46 +36,31 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
         // Cette fonction me permet d'ajouter des plantes dans la base de données
         // C'est à dire on récupère les champs et on les mets dans la bd les champs
-    fun valider(button: View){
-        val bd = PlantesBD.getDatabase(application).myDao()
-         // Supprimer les espaces au début et à la fin de chaque valeur String
+        fun valider(button: View){
 
-        var nomCom: String = binding.nomCommun.text.toString().trim()
-        var nomLat: String = binding.nomLatin.text.toString().trim()
-        var dateDebutFreq1 :String = binding.dateDebutFreq1.toString().trim()
-        var dateFinFreq1 = binding.dateFinFreq1.toString().trim()
+               val bd = PlantesBD.getDatabase(application).myDao()  // Supprimer les espaces au début et à la fin de chaque valeur String
 
-        var dateDebutFreq2 :String = binding.dateDebutFreq2.toString().trim()
-        var dateFinFreq2 = binding.dateFinFreq2.toString().trim()
+               var nomCom: String = binding.nomCommun.text.toString().trim()
+               var nomLat: String = binding.nomLatin.text.toString().trim()
 
-        var dateDebutFreq3 :String = binding.dateDebutFreq3.toString().trim()
-        var dateFinFreq3 = binding.dateFinFreq3.toString().trim()
+               var dateDebutFreq1 :String = binding.dateDebutFreq1.toString().trim()
+               var dateFinFreq1 = binding.dateFinFreq1.toString().trim()
 
-        var freq1: String = binding.freq1.text.toString().trim()
-        var freq2: String = binding.freq2.text.toString().trim()
-        var freq3 : String = binding.freq3.text.toString().trim()
+               var dateDebutFreq2 :String = binding.dateDebutFreq2.toString().trim()
+               var dateFinFreq2 = binding.dateFinFreq2.toString().trim()
+
+               var dateDebutFreq3 :String = binding.dateDebutFreq3.toString().trim()
+               var dateFinFreq3 = binding.dateFinFreq3.toString().trim()
+
+               var freq1: String = binding.freq1.text.toString().trim()
+               var freq2: String = binding.freq2.text.toString().trim()
+               var freq3 : String = binding.freq3.text.toString().trim()
+
+               var f1 : Int?
+               var f2 : Int?
+               var f3 : Int?
 
 
-
-        if(!binding.freq1.text.isNullOrBlank()){
-            if(!freq1.isDigitsOnly()){
-                Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
-                return
-            }
-
-        }
-        if(!binding.freq2.text.isNullOrBlank()){
-            if(!freq1.isDigitsOnly()){
-                    Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
-                    return
-                }
-            }
-        if(!binding.freq3.text.isNullOrBlank()){
-            if(!freq1.isDigitsOnly()){
-                    Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
-                    return
-                }
-            }
 
 
 
@@ -104,6 +89,100 @@ class AjouterNouvellePlante : AppCompatActivity() {
             lien = null // Si le TextView de nomLatin est vide alors insérer null comme NomLatin.
 
 
+
+            if(!freq1.isNullOrBlank()) {
+                if(!freq1.isDigitsOnly()){ // c'est pas vide et ça contient des caractères
+                    Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
+                    return
+                }else{  // Ça contient que des digit on peut mettre dans la BD
+
+                    f1=freq1.toInt()
+                    // Insertion Des fréquences
+                    //
+                    Thread {
+                        bd.insertFrequence( Frequence( dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f1 ))
+
+                        // Pour tester : récupérer toutes les plantes
+                        val lesPlantes: Array<TablePlante> = bd.loadAll()
+                        for(plante in lesPlantes)
+                         Log.d("liste des pays", "${plante.nomCommun}")
+
+                    }.start()
+
+
+
+                }
+            }
+
+            if(!freq2.isNotBlank()) {
+                if(!freq1.isDigitsOnly()){ // c'est pas vide et ça contient des caractères
+                    Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
+                    return
+                }else{  // Ça contient que des digit on peut mettre dans la BD
+                    f2=freq2.toInt()
+
+                    // Insertion Des fréquences
+                    //
+                    Thread {
+                        bd.insertFrequence( Frequence( dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f2))
+
+                        // Pour tester : récupérer toutes les plantes
+                        val lesFrequences: Array<Frequence> = bd.loadallFrequences()
+                        for(frequence in lesFrequences){
+                            Log.d("DATE DEBUT ", "${frequence.dateDebut}")
+                            Log.d("DATE FIN ", "${frequence.dateFin}")
+                            Log.d("FREQUENCE ", "${frequence.nbFois}")
+                        }
+
+
+
+                    }.start()
+
+
+                }
+            }
+
+
+
+
+
+
+            if(!freq3.isNotBlank()) {
+                if(!freq1.isDigitsOnly()){ // c'est pas vide et ça contient des caractères
+                    Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
+                    return
+                }else{  // Ça contient que des digit on peut mettre dans la BD
+                    f3=freq3.toInt()
+                    // Insertion Des fréquences
+                    //
+                    Thread {
+                        bd.insertFrequence( Frequence( dateDebut =dateDebutFreq1, dateFin = dateFinFreq1 , nbFois = f3 ))
+
+                        // Pour tester : récupérer toutes les plantes
+                        val lesPlantes: Array<TablePlante> = bd.loadAll()
+                        for(plante in lesPlantes)
+                            Log.d("liste des pays", "${plante.nomCommun}")
+
+                    }.start()
+
+
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             // Insertion
         Thread {
             bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/))
@@ -115,9 +194,24 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
         }.start()
 
+
+
+
+
+
+
+
+
+
+
+
         // Nettoyer tous les EditText
         binding.nomCommun.text.clear()
         binding.nomLatin.text.clear()
+        binding.freq1.text.clear()
+        binding.freq2.text.clear()
+        binding.freq3.text.clear()
+
     }
 
 }
