@@ -6,7 +6,7 @@ import androidx.room.*
 /**
  * Une classe PlantesBD pour définir la base de données.
  */
-@Database(entities = [TablePlante::class, Frequence::class], version = 1) // version : The database version.
+@Database(entities = [TablePlante::class, Frequence::class], version = 2) // version : The database version.
 @TypeConverters(Converters::class)
 abstract class PlantesBD : RoomDatabase() { // Une classe pour representer la base de données
     abstract fun myDao(): MyDao //  la fonction abstraite qui retourne le Dao que nous avons défini
@@ -21,7 +21,7 @@ abstract class PlantesBD : RoomDatabase() { // Une classe pour representer la ba
         fun getDatabase( context : Context): PlantesBD{
             if( instance != null )
                 return instance!! // the not-null assertion operator (!!) converts any value to a non-null type
-            val db = Room.databaseBuilder( context.applicationContext, PlantesBD::class.java, "TablePlante" ).build()
+            val db = Room.databaseBuilder( context.applicationContext, PlantesBD::class.java, "TablePlante" ).fallbackToDestructiveMigration().build()
             instance = db
             return instance!!
         }

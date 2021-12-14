@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,18 +32,24 @@ class AffichePlante : AppCompatActivity() {
         recyclerView.hasFixedSize() /* pour améliorer les pérformances*/
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // BDD
-        val bd = PlantesBD.getDatabase(application)
-        var listeDesFrequences : Array<TablePlante> = arrayOf() // Le Array de pays à afficher dans RecyclerView
-        val t= Thread{ listeDesFrequences = bd.myDao().loadAll() }
-        t.start()
-        t.join()
+        if(planteId != null) {
+            // BDD
+            val bd = PlantesBD.getDatabase(application)
+            var listeDesFrequences : Array<Frequence> = arrayOf() // Le Array de frequences à afficher dans RecyclerView
+            val t = Thread{ listeDesFrequences = bd.myDao().loadFrequencesById(planteId) }
+            t.start()
+            t.join()
 
-        val couleurPaire: Int = ResourcesCompat.getColor(resources, R.color.couleurPaire, null)
-        val couleurImpaire: Int = ResourcesCompat.getColor(resources, R.color.couleurImpaire, null)
+            val couleurPaire: Int = ResourcesCompat.getColor(resources, R.color.couleurPaire, null)
+            val couleurImpaire: Int = ResourcesCompat.getColor(resources, R.color.couleurImpaire, null)
 
-        var adapter: ListePlantesRecycleAdapter = ListePlantesRecycleAdapter( this , listeDesPlantes, couleurPaire, couleurImpaire)
-        recyclerView.adapter = adapter
+            var adapter: ListeFrequencesRecycleAdapter = ListeFrequencesRecycleAdapter( this , listeDesFrequences, couleurPaire, couleurImpaire)
+            recyclerView.adapter = adapter
+
+        } else {
+            Toast.makeText(this, "Les fréquences pour cette plante n'ont pas pu être trouvées dans la base de données. \n", Toast.LENGTH_LONG).show()
+        }
+
     }
 
     fun getListePlantes(view: View) {
