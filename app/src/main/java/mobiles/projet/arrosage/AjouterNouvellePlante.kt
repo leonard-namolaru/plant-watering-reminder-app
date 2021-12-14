@@ -70,7 +70,13 @@ class AjouterNouvellePlante : AppCompatActivity() {
             lien = null // Si le TextView de nomLatin est vide alors insérer null comme NomLatin.
 
         var idPlanteDansBDD : Int = 0
-        // Insertion
+            Log.d("idPlanteDansBDD", idPlanteDansBDD.toString());
+            Log.d("dateDebutFreq1", dateDebutFreq1);
+            Log.d("dateFinFreq1", dateFinFreq1);
+            Log.d("dateFinFreq1", dateFinFreq1);
+            Log.d("binding.freq1", binding.freq1.text.toString().trim());
+
+            // Insertion
         var t = Thread {
                 bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/))
 
@@ -79,6 +85,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
             }
         t.start()
         t.join();
+
 
 
             if(!freq1.isNullOrBlank()) {
