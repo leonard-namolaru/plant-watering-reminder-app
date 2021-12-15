@@ -36,19 +36,12 @@ class ListeFrequencesRecycleAdapter ( val context : Context , val listeDesFreque
         val textViewPourNom: TextView = holder.itemView.findViewById(R.id.nom) as TextView
         val imageViewPourPlante: ImageView = holder.itemView.findViewById(R.id.photoPlante) as ImageView
         imageViewPourPlante.visibility = INVISIBLE;
-        textViewPourNom.text = listeDesFrequences[position].nbFois + listeDesFrequences[position].dateDebut + " " + listeDesFrequences[position].dateFin + " " ;
+        textViewPourNom.text = listeDesFrequences[position].nbFois + listeDesFrequences[position].dateDebut + " " + listeDesFrequences[position].dateFin + " "  ;
         if (position % 2 == 0)
             holder.itemView.setBackgroundColor(couleurPaire)
         else
             holder.itemView.setBackgroundColor(couleurImpaire)
 
-        for(frequence in listeDesFrequences) {
-            Log.d("IdPlante", frequence.IdPlante.toString())
-            Log.d("IdFrequence", frequence.IdFrequence.toString())
-            Log.d("dateDebut", frequence.dateDebut)
-            Log.d("dateFin", frequence.dateFin)
-            Log.d("nbFois", frequence.nbFois)
-        }
 
     }
 

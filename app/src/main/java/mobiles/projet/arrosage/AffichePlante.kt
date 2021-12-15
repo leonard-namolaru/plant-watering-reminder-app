@@ -24,9 +24,12 @@ class AffichePlante : AppCompatActivity() {
         val intent = getIntent() //retourne Intent qui a fait démarrer l'activité
         val nomCommun : String?  = intent.getExtras()?.getString( "nomCommun" )
         val nomLatin : String?  = intent.getExtras()?.getString( "nomLatin" )
+        val dateProchainArosage :String ?= intent.getExtras()?.getString("ProchainArosage")
         val planteId : Int?  = intent.getExtras()?.getInt("id")
-        if (nomCommun != null) binding.leNomCommun.text = nomCommun
+        if (nomCommun != null) binding.leNomCommun.text = nomCommun  // afichage
         if (nomLatin != null) binding.leNomLatin.text = nomLatin
+        if (dateProchainArosage!= null) binding.dateArosage.text = dateProchainArosage
+
 
         // récupérer la référence vers RecyclerView
         val recyclerView = binding.recycler as RecyclerView
@@ -45,13 +48,7 @@ class AffichePlante : AppCompatActivity() {
             t.start()
             t.join()
 
-            for(frequence in listeDesFrequences) {
-                Log.d("IdPlante", frequence.IdPlante.toString())
-                Log.d("IdFrequence", frequence.IdFrequence.toString())
-                Log.d("dateDebut", frequence.dateDebut)
-                Log.d("dateFin", frequence.dateFin)
-                Log.d("nbFois", frequence.nbFois)
-            }
+
 
 
             val couleurPaire: Int = ResourcesCompat.getColor(resources, R.color.couleurPaire, null)

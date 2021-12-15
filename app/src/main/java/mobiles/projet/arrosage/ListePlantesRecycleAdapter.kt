@@ -35,6 +35,7 @@ class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: 
             intent.putExtra("id", plante.idPlante)
             intent.putExtra("nomCommun", plante.nomCommun)
             intent.putExtra("nomLatin", plante.nomLatin)
+            intent.putExtra("ProchainArosage", plante.dateProchainArosage)
             context.startActivity(intent)
         } )
 
@@ -51,7 +52,7 @@ class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: 
         val textViewPourNom: TextView = holder.itemView.findViewById(R.id.nom) as TextView
         val imageViewPourPlante: ImageView = holder.itemView.findViewById(R.id.photoPlante) as ImageView
 
-        textViewPourNom.text = listeDesPlantes[position].nomCommun
+        textViewPourNom.text = listeDesPlantes[position].nomCommun + " "
             if (position % 2 == 0)
                 holder.itemView.setBackgroundColor(couleurPaire)
             else
