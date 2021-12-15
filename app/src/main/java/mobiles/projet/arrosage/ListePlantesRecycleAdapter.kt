@@ -36,6 +36,7 @@ class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: 
             intent.putExtra("nomCommun", plante.nomCommun)
             intent.putExtra("nomLatin", plante.nomLatin)
             intent.putExtra("ProchainArosage", plante.dateProchainArosage)
+
             context.startActivity(intent)
         } )
 

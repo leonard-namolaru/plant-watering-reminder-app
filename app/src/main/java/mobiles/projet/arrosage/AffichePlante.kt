@@ -51,6 +51,7 @@ class AffichePlante : AppCompatActivity() {
 
 
 
+
             val couleurPaire: Int = ResourcesCompat.getColor(resources, R.color.couleurPaire, null)
             val couleurImpaire: Int = ResourcesCompat.getColor(resources, R.color.couleurImpaire, null)
 
