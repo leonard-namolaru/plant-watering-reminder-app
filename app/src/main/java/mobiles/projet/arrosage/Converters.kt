@@ -4,16 +4,18 @@ import java.util.*
 
 
 class Converters {
-// source : documentation officielle de android
 
     @TypeConverter
-    fun fromTimestamp(value: Long?): Date? {
-        return value?.let { Date(it) }
+    fun TimestampToCalendar(timeStamp: Long?): Calendar? {
+        var calendar : Calendar = Calendar.getInstance();
+        if(timeStamp != null)
+            calendar.setTimeInMillis(timeStamp);
+        return calendar
     }
 
     @TypeConverter
-    fun dateToTimestamp(date: Date?): Long? {
-        return date?.time?.toLong()
+    fun CalendarToTimestamp(calendar: Calendar?): Long? {
+        return calendar?.getTimeInMillis()
     }
 
 

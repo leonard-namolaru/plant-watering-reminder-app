@@ -10,6 +10,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mobiles.projet.arrosage.databinding.ActivityAffichePlanteBinding
+import java.util.*
 
 class AffichePlante : AppCompatActivity() {
     private lateinit var binding: ActivityAffichePlanteBinding
@@ -24,12 +25,19 @@ class AffichePlante : AppCompatActivity() {
         val intent = getIntent() //retourne Intent qui a fait démarrer l'activité
         val nomCommun : String?  = intent.getExtras()?.getString( "nomCommun" )
         val nomLatin : String?  = intent.getExtras()?.getString( "nomLatin" )
-        val dateProchainArosage :String ?= intent.getExtras()?.getString("ProchainArosage")
+        val dateProchainArosage :Long ?= intent.getExtras()?.getLong("ProchainArosage")
         val planteId : Int?  = intent.getExtras()?.getInt("id")
         if (nomCommun != null) binding.leNomCommun.text = nomCommun  // afichage
         if (nomLatin != null) binding.leNomLatin.text = nomLatin
-        if (dateProchainArosage!= null) binding.dateArosage.text = dateProchainArosage
 
+        if (dateProchainArosage!= null) {
+            var prochainArosage : Calendar = Calendar.getInstance()
+            prochainArosage.setTimeInMillis(dateProchainArosage)
+            val jour : String = prochainArosage.get(Calendar.DAY_OF_MONTH).toString()
+            val moins : String = prochainArosage.get(Calendar.MONTH).toString()
+            val annee : String = prochainArosage.get(Calendar.YEAR).toString()
+            binding.dateArosage.text = jour + " " + moins + " " + annee
+        }
 
         // récupérer la référence vers RecyclerView
         val recyclerView = binding.recycler as RecyclerView

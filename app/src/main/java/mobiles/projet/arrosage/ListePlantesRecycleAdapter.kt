@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import mobiles.projet.arrosage.MainActivity
+import java.util.Calendar
 
 class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: Array<TablePlante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     // Parametres du constructeur : la liste mutable detudiants, les couleurs couleurPaire, couleurImpair (en tant que Int)
@@ -35,7 +36,7 @@ class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: 
             intent.putExtra("id", plante.idPlante)
             intent.putExtra("nomCommun", plante.nomCommun)
             intent.putExtra("nomLatin", plante.nomLatin)
-            intent.putExtra("ProchainArosage", plante.dateProchainArosage)
+            intent.putExtra("ProchainArosage", plante.dateProchainArosage.getTimeInMillis())
 
             context.startActivity(intent)
         } )

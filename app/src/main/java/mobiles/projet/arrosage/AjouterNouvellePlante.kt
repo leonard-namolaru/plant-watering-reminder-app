@@ -1,6 +1,5 @@
 package mobiles.projet.arrosage
 
-import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.room.PrimaryKey
@@ -10,6 +9,7 @@ import android.view.View
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.text.isDigitsOnly
+import java.util.Calendar
 
 class AjouterNouvellePlante : AppCompatActivity() {
     private lateinit var binding: ActivityAjouterNouvellePlanteBinding
@@ -86,9 +86,11 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
             // Insertion
             var t = Thread {
-                bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/, dateProchainArosage = "12/10/2012"))
+                var prochainArosage : Calendar = Calendar.getInstance()
+                prochainArosage.set(2022, 10, 3)
+                bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/, dateProchainArosage = prochainArosage))
 
-            val lesPlantes: Array<TablePlante> = bd.loadAll() // Récupérer toutes les plantes
+            val lesPlantes : Array<TablePlante> = bd.loadAll() // Récupérer toutes les plantes
             idPlanteDansBDD = lesPlantes.last().idPlante;
             }
             t.start()

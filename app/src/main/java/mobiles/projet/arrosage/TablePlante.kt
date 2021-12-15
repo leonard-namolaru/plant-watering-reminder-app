@@ -1,6 +1,6 @@
 package mobiles.projet.arrosage
-import android.icu.util.Calendar
 import androidx.room.*
+import java.util.Calendar
 
 @Entity
 data class TablePlante (
@@ -8,7 +8,7 @@ data class TablePlante (
     var idPlante : Int=0, // NOT NULL
     var nomCommun: String, // NOT NULL
     var nomLatin: String?,
-    var dateProchainArosage: String
+    var dateProchainArosage: Calendar
     //var lienPhotoDeLaPlante: String?
    //var dateDernierArrosage: Calendar,
 )

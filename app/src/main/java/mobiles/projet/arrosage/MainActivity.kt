@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         var adapter: ListePlantesRecycleAdapter = ListePlantesRecycleAdapter( this@MainActivity , listeDesPlantes, couleurPaire, couleurImpaire)
         recyclerView.adapter = adapter
 
+        /* **** Une alarme qui se déclenche périodiquement chaque 24h. **** */
+
         /* intent à mettre dans pendingIntent. AlarmManager va ensuite l'envoyer vers le service MyService */
         val intent = Intent(this, MyService::class.java)
         // intent.putExtra(MyService.MEDIA_STATE, MyService.START )
