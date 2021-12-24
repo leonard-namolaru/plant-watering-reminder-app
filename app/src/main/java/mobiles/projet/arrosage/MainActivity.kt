@@ -14,7 +14,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById(R.id.recycler) as RecyclerView
         recyclerView.hasFixedSize() /* pour améliorer les pérformances*/
         recyclerView.layoutManager = LinearLayoutManager(this)
+
 
         /*  créer une liste de Strings à partir de fichier ressources
             //var listeDesPlantes : MutableList<Plante> = mutableListOf<Plante>()
