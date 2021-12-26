@@ -3,11 +3,8 @@ package mobiles.projet.arrosage
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.PendingIntent.getActivity
 import android.app.Service
 import android.content.Intent
-import android.content.Intent.getIntent
-import android.content.Intent.parseIntent
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.IBinder
@@ -37,13 +34,13 @@ class MyService : Service() {
         Log.d("onCreate()","onCreate()")
         Toast.makeText(this, "ALARM !!!!!", Toast.LENGTH_LONG).show();
         createNotificationChannel()
-        val intent : Intent = Intent(); //retourne Intent qui a fait démarrer l'activité
+        val intent : Intent = Intent(this, PlantesArroserAujourdhui::class.java);
         val pendingIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_IMMUTABLE )
 
         /*création de notification */
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("lancer l'activité C")
-            .setContentText("ici tu peut lancer l'activité C immédiatement")
+            .setContentTitle("Plantes à arroser aujourd'hui")
+            .setContentText("Liste des plantes à arroser aujourd'hui. Pour accéder à la liste, cliquez ici")
             .setContentIntent(pendingIntent)
             .setAutoCancel(true) // la notification disparaît quand utilisateur...
             .setSmallIcon(R.drawable.ic_add) // SmallIcon est obligatoire, ic_add ; TEST
@@ -65,7 +62,7 @@ class MyService : Service() {
         Log.d("onStartCommand()","onStartCommand()")
         //le service devient foreground
         // startForeground( id : Int, notification : Notification)
-        stopSelf()
+        //stopSelf()
 
         return Service.START_STICKY
     }
