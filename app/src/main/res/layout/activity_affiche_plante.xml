@@ -7,6 +7,7 @@
     android:background="@color/couleurPaire"
     tools:context=".AffichePlante">
 
+
     <LinearLayout
         android:id="@+id/linear_layout_vertical"
         android:layout_width="match_parent"
