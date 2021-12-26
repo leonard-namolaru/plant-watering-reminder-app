@@ -65,7 +65,8 @@ class MainActivity : AppCompatActivity() {
         //alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 10 * 1000, pendingIntent) // 10 sec
         val calendar: Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, 10)
+            set(Calendar.HOUR_OF_DAY, 19)
+            set(Calendar.MINUTE, 30)
         }
 
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
