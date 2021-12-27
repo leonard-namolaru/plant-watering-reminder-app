@@ -14,7 +14,7 @@ class PlantesArroserAujourdhui : AppCompatActivity() {
         binding = ActivityPlantesArroserAujourdhuiBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val intent = getIntent() //retourne l'Intent qui a fait démarrer l'activité
+        val intent = getIntent() // Retourne l'Intent qui a fait démarrer l'activité
 
     }
 }
