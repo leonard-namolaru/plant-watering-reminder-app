@@ -8,6 +8,7 @@
     tools:context=".AffichePlante">
 
 
+
     <LinearLayout
         android:id="@+id/linear_layout_vertical"
         android:layout_width="match_parent"
@@ -16,14 +17,52 @@
         android:layout_margin="5dp"
         android:paddingTop="1dp"
         android:paddingBottom="4dp">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="leNomCommun"
+            android:text="    INFORMATIONS SUR LA PLANTE "
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
 
+
+        <ImageView
+            android:id="@+id/photoPlante"
+            android:layout_width="370dp"
+            android:layout_height="162dp"
+            android:contentDescription="description"
+            android:paddingTop="5dp"
+            android:src="@drawable/ic_launcher_foreground" />
+
+
+        <TextView
+            android:id="@+id/leNomCommu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Le nom commun : "
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
         <TextView
             android:id="@+id/leNomCommun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tag="leNomCommun"
             android:text=" "
-            android:textSize="36sp"
+            android:layout_marginLeft="@dimen/textSize"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            />
+
+        <TextView
+            android:id="@+id/leNomLat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Le nom Latin : "
+            android:textSize="20sp"
             android:textStyle="bold"
             />
         <TextView
@@ -32,30 +71,38 @@
             android:layout_height="wrap_content"
             android:tag="leNomLatin"
             android:text=" "
+            android:layout_marginLeft="@dimen/textSize"
             android:textSize="@dimen/textSize"
             android:textStyle="italic"
             />
 
 
         <TextView
+            android:id="@+id/leNomLa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" La date du prochain arosage : "
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <TextView
             android:id="@+id/dateArosage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tag="leNomCommun"
             android:text=" "
-            android:textSize="36sp"
-            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/textSize"
+            android:textSize="18sp"
+            android:textStyle="italic"
             />
 
 
-
-        <ImageView
-            android:id="@+id/photoPlante"
+        <TextView
+            android:id="@+id/lesFreq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_foreground"
-            android:contentDescription="description"
-            android:paddingTop="5dp"
+            android:text=" Les Frequences d'arosage :  "
+            android:textSize="20sp"
+            android:textStyle="bold"
             />
 
         <androidx.recyclerview.widget.RecyclerView

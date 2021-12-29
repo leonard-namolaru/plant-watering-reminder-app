@@ -20,30 +20,38 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // récupérer la référence vers RecyclerView
+        // récupérer la référence vers RecyclerView qui se trouve dans actvitymain.xml
         val recyclerView = findViewById(R.id.recycler) as RecyclerView
         recyclerView.hasFixedSize() /* pour améliorer les pérformances*/
         recyclerView.layoutManager = LinearLayoutManager(this)
 
 
+
+        // 1er étape avant la création de la bd
         /*  créer une liste de Strings à partir de fichier ressources
             //var listeDesPlantes : MutableList<Plante> = mutableListOf<Plante>()
            // créer une liste de Strings à partir de fichier ressources (resources : une propriété d'Activity)
             val nomsDesPlantes: Array<String> =  resources.getStringArray(R.array.plantes)
 
             for(i in nomsDesPlantes.indices)
-                listeDesPlantes.add( Plante(nomsDesPlantes[i]) )
+                listeDesPlantes.add( Plante(nomsDesPlantes[i]) )  pour créer les plantes
          */
 
-        // BDD
-        val bd = PlantesBD.getDatabase(application)
-        var listeDesPlantes : Array<TablePlante> = arrayOf() // Le Array de pays à afficher dans RecyclerView
+        // Récupéerer l'instance vers la base de données
+        val bd = PlantesBD.getDatabase(application) //
+
+        // Le Array des plantes  à afficher dans RecyclerView
+        var listeDesPlantes : Array<TablePlante> = arrayOf() // on a declaré une liste de plantes qu'on va recupéerer pour l'afficher dans recycler view
+
+        // on remplit le Array des plantes a affciher a partir de la bd avec le loadAll()
         val t= Thread{ listeDesPlantes = bd.myDao().loadAll() }
-        t.start()
+        t.start()  // loadall  fait  :    "SELECT * FROM TablePlante" et renvoie un Array<TablePlante>
         t.join()
+
 
         val couleurPaire: Int = ResourcesCompat.getColor(resources, R.color.couleurPaire, null)
         val couleurImpaire: Int = ResourcesCompat.getColor(resources, R.color.couleurImpaire, null)
+
 
         var adapter: ListePlantesRecycleAdapter = ListePlantesRecycleAdapter( this@MainActivity , listeDesPlantes, couleurPaire, couleurImpaire)
         recyclerView.adapter = adapter

@@ -20,6 +20,7 @@ class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: 
 
     // RecyclerView apelle onCreateViewHolder quand il a besoin d'un nouveau couple (View, Holder)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        //A partir de la liste , on crée les couple view holder
         // Crer View dun element de la liste a partir de fichier layout xml
         val v = LayoutInflater
                 .from(parent.getContext())
@@ -29,7 +30,7 @@ class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: 
 
         // Installer le meme listener sur chaqaue View
         v.setOnClickListener( View.OnClickListener {
-           val plantePosition: Int = holder.absoluteAdapterPosition
+           val plantePosition: Int = holder.absoluteAdapterPosition // récuperer la position sur la quelle on a cliqué
             val plante: TablePlante = listeDesPlantes[plantePosition]
 
             val intent = Intent(context , AffichePlante::class.java)
@@ -38,7 +39,7 @@ class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: 
             intent.putExtra("nomLatin", plante.nomLatin)
             intent.putExtra("ProchainArosage", plante.dateProchainArosage.getTimeInMillis())
 
-            context.startActivity(intent)
+            context.startActivity(intent) // on va lancer une autre actuvté en passant intent en parametre qui contient afficheplante (le fichier kt a lancer
         } )
 
         return holder // retourner le ViewHolder

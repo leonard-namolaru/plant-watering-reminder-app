@@ -20,7 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tag="titre"
-            android:text="Plantes à arroser aujourd'hui"
+           android:fontFamily="cursive"
+            android:text="    À arroser aujourd'hui "
             android:textSize="36sp"
             android:textStyle="bold" />
     </LinearLayout>

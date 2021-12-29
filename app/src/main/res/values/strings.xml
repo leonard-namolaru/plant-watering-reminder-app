@@ -2,6 +2,8 @@
     <string name="app_name">Rappels d\'arrosage</string>
     <string name="channel_name">Rappels d\'arrosage</string>
     <string name="channel_description">Rappels d\'arrosage</string>
+
+    <!-- La lite qui sera récupérée   -->
     <string-array name="plantes">
         <item>Plante 1</item>
         <item>Plante 2</item>
