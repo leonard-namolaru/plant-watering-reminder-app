@@ -18,6 +18,15 @@ class AjouterNouvellePlante : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAjouterNouvellePlanteBinding.inflate(layoutInflater)
          setContentView(binding.root)
+        val actionBar = supportActionBar
+        actionBar!!.title= "AJouter Plante"
+
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
         // Cette fonction me permet d'ajouter des plantes dans la base de données

@@ -18,6 +18,13 @@ class AffichePlante : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_affiche_plante)
+        val actionBar = supportActionBar
+        actionBar!!.title= "Affichage Plante"
+
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+
+
 
         binding = ActivityAffichePlanteBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -77,6 +84,10 @@ class AffichePlante : AppCompatActivity() {
         startActivity(intent)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 
 
 }
