@@ -9,7 +9,7 @@ class Converters {
     fun TimestampToCalendar(timeStamp: Long?): Calendar? {
         var calendar : Calendar = Calendar.getInstance();
         if(timeStamp != null)
-            calendar.setTimeInMillis(timeStamp);
+            calendar.setTimeInMillis(timeStamp)
         return calendar
     }
 

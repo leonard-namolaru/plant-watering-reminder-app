@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import mobiles.projet.arrosage.MainActivity
 import java.util.Calendar
 
-class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: Array<TablePlante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: MutableList<TablePlante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     // Parametres du constructeur : la liste mutable detudiants, les couleurs couleurPaire, couleurImpair (en tant que Int)
 
     class VH(itemView: View) : RecyclerView.ViewHolder(itemView)
