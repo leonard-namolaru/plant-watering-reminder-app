@@ -34,7 +34,7 @@ class AffichePlante : AppCompatActivity() {
             var prochainArosage : Calendar = Calendar.getInstance()
             prochainArosage.setTimeInMillis(dateProchainArosage)
             val jour : String = prochainArosage.get(Calendar.DAY_OF_MONTH).toString()
-            val moins : String = prochainArosage.get(Calendar.MONTH).toString()
+            var moins : String = (prochainArosage.get(Calendar.MONTH).toInt() + 1).toString()
             val annee : String = prochainArosage.get(Calendar.YEAR).toString()
             binding.dateArosage.text = jour + " " + moins + " " + annee
         }
