@@ -1,5 +1,7 @@
 package mobiles.projet.arrosage
 
+import android.app.Activity
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.room.PrimaryKey
@@ -10,9 +12,36 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.text.isDigitsOnly
 import java.util.Calendar
+import android.content.Intent
+
+//import org.jcp.xml.dsig.internal.dom.DOMKeyInfo.getContent
+import java.io.File
+
 
 class AjouterNouvellePlante : AppCompatActivity() {
     private lateinit var binding: ActivityAjouterNouvellePlanteBinding
+    /* propriété : Uri de fichier local */
+    var localUri : Uri? = null
+    /* la propriété getContent pour enregistrer une méthode callback
+    * appelée au retour de la nouvelle activité.
+    * Ici cette méthode callback est implementée par une lambda qui
+    * qui obtient l’Uri de l’image comme paramètre. */
+   // val getContent = registerForActivityResult(ActivityResultContracts
+   //     .GetContent())
+
+
+
+   /* { uri: Uri? ->
+        if( uri == null ) return@registerForActivityResult
+            /* à faire :
+            * si uri de l’image différent de null alors copier l’image dans
+            la
+            * mémoire interne de l’appareil et mémoriser l’emplacement de l
+            ’image
+            * copiée dans la base de données.
+            */
+    }
+*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +52,9 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.setDisplayHomeAsUpEnabled(true)
+
+
+
     }
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
@@ -36,6 +68,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
             val bd = PlantesBD.getDatabase(application).myDao()  // Supprimer les espaces au début et à la fin de chaque valeur String
             var nomCom: String = binding.nomCommun.text.toString().trim()
             var nomLat: String = binding.nomLatin.text.toString().trim()
+
 
 
 
