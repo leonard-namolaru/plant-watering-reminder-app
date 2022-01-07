@@ -12,21 +12,17 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ListePlantesArroserAujourdhuiRecycleAdapter ( val context : Context , val listeDesPlantes: MutableList<TablePlante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     // Parametres du constructeur : la liste mutable de plantes, les couleurs couleurPaire, couleurImpair (en tant que Int)
-    val checked = ArrayList<String>()
+    val checked = ArrayList<TablePlante>()
 
     class VH(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    /* un lister à associer à chaque View dans RecyclerView,
- * activé quand l'utilisateur
- * sélectionne un élément dans RecyclerView */
-    var listener = View.OnClickListener { view ->
-        val w = view as CheckedTextView
-        w.toggle()
-        if (w.isChecked) {
-            checked.add(w.text.toString())
-        } else {
-            checked.remove(w.text.toString())
-        }
+    /* removeChecked() est appelé pour supprimer les items "checked" de l'adapter
+    * Cette fonction n'existe pas dans la classe RecyclerView.Adapter mais
+    * mais j'en ai besoin dans mon Activity */
+    fun removeChecked() {
+        listeDesPlantes.removeAll(checked)
+        checked.clear()
+        notifyDataSetChanged()
     }
 
     // RecyclerView apelle onCreateViewHolder quand il a besoin d'un nouveau couple (View, Holder)
@@ -38,24 +34,19 @@ class ListePlantesArroserAujourdhuiRecycleAdapter ( val context : Context , val 
             .inflate(R.layout.element_liste_plantes_arroser_aujourdhui, parent, false) as CheckedTextView
 
         val holder: RecyclerView.ViewHolder = VH(v)
-
-        /* Installer le meme listener sur chaqaue View
-        v.setOnClickListener( View.OnClickListener {
+        // Installer le meme listener sur chaqaue View
+        v.setOnClickListener( View.OnClickListener { view ->
             val plantePosition: Int = holder.absoluteAdapterPosition // récuperer la position sur la quelle on a cliqué
             val plante: TablePlante = listeDesPlantes[plantePosition]
-
-            val intent = Intent(context , AffichePlante::class.java)
-            intent.putExtra("id", plante.idPlante)
-            intent.putExtra("nomCommun", plante.nomCommun)
-            intent.putExtra("nomLatin", plante.nomLatin)
-            intent.putExtra("ProchainArosage", plante.dateProchainArosage.getTimeInMillis())
-
-            context.startActivity(intent) // on va lancer une autre actuvté en passant intent en parametre qui contient afficheplante (le fichier kt a lancer
+            val w = view as CheckedTextView
+            w.toggle() // Changer l'état  de la vue à l'inverse de son état actuel
+            if (w.isChecked) {
+                checked.add(plante)
+            } else {
+                checked.remove(plante)
+            }
         } )
-        */
 
-        /*installer le même listener sur chaque View */
-        v.setOnClickListener(listener)
         return holder // retourner le ViewHolder
     }
 

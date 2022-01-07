@@ -2,6 +2,7 @@ package mobiles.projet.arrosage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,7 @@ import java.util.*
 
 class PlantesArroserAujourdhui : AppCompatActivity() {
     private lateinit var binding: ActivityPlantesArroserAujourdhuiBinding
+    lateinit var adapter: ListePlantesArroserAujourdhuiRecycleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +52,13 @@ class PlantesArroserAujourdhui : AppCompatActivity() {
         val couleurImpaire: Int = ResourcesCompat.getColor(resources, R.color.couleurImpaire, null)
 
 
-        var adapter: ListePlantesArroserAujourdhuiRecycleAdapter = ListePlantesArroserAujourdhuiRecycleAdapter( this , listePourAffichage, couleurPaire, couleurImpaire)
+        adapter = ListePlantesArroserAujourdhuiRecycleAdapter( this , listePourAffichage, couleurPaire, couleurImpaire)
         recyclerView.adapter = adapter
 
+    }
+
+    fun supprimer(button: View) {
+        // Appeler la fonction de Adapter qui supprime tous les items dans l'état "checked"
+        adapter.removeChecked()
     }
 }

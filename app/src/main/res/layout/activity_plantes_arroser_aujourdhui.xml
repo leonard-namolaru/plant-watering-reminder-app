@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tag="desc"
-            android:text= "Vous pouvez marquer les plantes dont vous voudrez reporter l'arrosage à demain"
+            android:text="Vous pouvez marquer les plantes dont vous voudrez reporter l'arrosage à demain"
             android:textSize="16sp"
              />
 
@@ -41,6 +41,13 @@
             android:layout_marginBottom="30dp"
             android:scrollbars="vertical" />
 
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="supprimer"
+            android:text="Confirmation" />
+        
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
