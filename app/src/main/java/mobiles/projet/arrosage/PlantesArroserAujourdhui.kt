@@ -2,7 +2,6 @@ package mobiles.projet.arrosage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,7 +50,7 @@ class PlantesArroserAujourdhui : AppCompatActivity() {
         val couleurImpaire: Int = ResourcesCompat.getColor(resources, R.color.couleurImpaire, null)
 
 
-        var adapter: ListePlantesRecycleAdapter = ListePlantesRecycleAdapter( this , listePourAffichage, couleurPaire, couleurImpaire)
+        var adapter: ListePlantesArroserAujourdhuiRecycleAdapter = ListePlantesArroserAujourdhuiRecycleAdapter( this , listePourAffichage, couleurPaire, couleurImpaire)
         recyclerView.adapter = adapter
 
     }

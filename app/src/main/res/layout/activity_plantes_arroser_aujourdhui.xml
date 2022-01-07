@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/couleurPaire"
     tools:context=".PlantesArroserAujourdhui">
 
     <LinearLayout
@@ -11,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="5dp"
         android:paddingTop="1dp"
         android:paddingBottom="4dp">
 
@@ -20,10 +20,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tag="titre"
-           android:fontFamily="cursive"
-            android:text="    À arroser aujourd'hui "
-            android:textSize="36sp"
+            android:text="À arroser aujourd'hui "
+            android:textSize="24sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="desc"
+            android:text= "Vous pouvez marquer les plantes dont vous voudrez reporter l'arrosage à demain"
+            android:textSize="16sp"
+             />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
