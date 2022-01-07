@@ -48,12 +48,12 @@ class MainActivity : AppCompatActivity() {
         t.start()  // loadall  fait  :    "SELECT * FROM TablePlante" et renvoie un Array<TablePlante>
         t.join()
 
-
+        var listePourAffichage : MutableList<TablePlante> = listeDesPlantes.toMutableList()
         val couleurPaire: Int = ResourcesCompat.getColor(resources, R.color.couleurPaire, null)
         val couleurImpaire: Int = ResourcesCompat.getColor(resources, R.color.couleurImpaire, null)
 
 
-        var adapter: ListePlantesRecycleAdapter = ListePlantesRecycleAdapter( this@MainActivity , listeDesPlantes, couleurPaire, couleurImpaire)
+        var adapter: ListePlantesRecycleAdapter = ListePlantesRecycleAdapter( this@MainActivity , listePourAffichage, couleurPaire, couleurImpaire)
         recyclerView.adapter = adapter
 
         /* **** Une alarme qui se déclenche périodiquement chaque 24h. **** */
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         //alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 10 * 1000, pendingIntent) // 10 sec
         val calendar: Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, 19)
+            set(Calendar.HOUR_OF_DAY, 7)
             set(Calendar.MINUTE, 30)
         }
 

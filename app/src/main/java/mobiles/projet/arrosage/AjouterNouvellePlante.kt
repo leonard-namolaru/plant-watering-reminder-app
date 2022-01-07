@@ -96,7 +96,8 @@ class AjouterNouvellePlante : AppCompatActivity() {
             // Insertion
             var t = Thread {
                 var prochainArosage : Calendar = Calendar.getInstance()
-                prochainArosage.set(2022, 10, 3)
+                Log.d("test", prochainArosage.get(Calendar.DAY_OF_MONTH).toString())
+                prochainArosage.set(Calendar.DAY_OF_YEAR, prochainArosage.get(Calendar.DAY_OF_YEAR) + freq1.toInt())
                 bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/, dateProchainArosage = prochainArosage))
 
             val lesPlantes : Array<TablePlante> = bd.loadAll() // Récupérer toutes les plantes
