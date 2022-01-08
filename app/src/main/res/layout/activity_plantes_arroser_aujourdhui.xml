@@ -33,6 +33,7 @@
             android:textSize="16sp"
              />
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
@@ -42,12 +43,24 @@
             android:scrollbars="vertical" />
 
         <Button
-            android:id="@+id/add"
-            android:layout_width="wrap_content"
+            android:id="@+id/supprimer"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="supprimer"
-            android:text="Confirmation" />
-        
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="Report des arrosages pour demain pour les plantes sélectionnées" />
+
+        <Button
+            android:id="@+id/arrosagesEffectues"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="arrosagesEffectues"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="L'arrosage a été effectué pour toutes les plantes" />
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

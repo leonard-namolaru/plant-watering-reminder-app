@@ -9,6 +9,7 @@ import android.media.MediaParser.SeekPoint.START
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
+import android.view.MenuItem
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -74,6 +75,7 @@ class MainActivity : AppCompatActivity() {
         val calendar: Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, 7)
+            set(Calendar.AM_PM, Calendar.AM)
             set(Calendar.MINUTE, 30)
         }
 
@@ -82,6 +84,11 @@ class MainActivity : AppCompatActivity() {
 
     fun ajouterPlante(view: View) {
         val intent = Intent(this, AjouterNouvellePlante::class.java)
+        startActivity(intent)
+    }
+
+    fun plantesArroserAujourdhui(item: MenuItem) {
+        val intent = Intent(this, PlantesArroserAujourdhui::class.java)
         startActivity(intent)
     }
 }

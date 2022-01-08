@@ -20,6 +20,10 @@ interface MyDao {
     @Query("SELECT * FROM Frequence")
     fun loadallFrequences(): Array<Frequence>
 
+    @Update
+    fun updatePlante(vararg plante :TablePlante) : Int // La valeur de retour (optionnelle) donne le nombre d'items modifiés par update.
+
+
     /**
      * La méthode loadFrequencesById(id) retourne un Array<Frequence> avec tous les frequences d'une plante
      */
@@ -28,5 +32,4 @@ interface MyDao {
 
     @Query("SELECT * FROM TablePlante WHERE dateProchainArosage = :calendar ") // Plantes à arroser aujourd'hui
     fun loadPlantesArroserAujourdhui(calendar: Calendar): Array<TablePlante> // Requête paramétrée : dans la requete le nom de paramètre de la fonction précédé par :
-
 }

@@ -64,7 +64,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
         val bd = PlantesBD.getDatabase(application).myDao()
 
         var dateAujourdhui : Calendar = Calendar.getInstance()
-        val moisEnCours : Int = dateAujourdhui.get(Calendar.MONTH)
+        val moisEnCours : Int = dateAujourdhui.get(Calendar.MONTH) + 1
         var frequenceActuelle : Int = 0
 
 

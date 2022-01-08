@@ -1,14 +1,18 @@
 package mobiles.projet.arrosage
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckedTextView
 import androidx.recyclerview.widget.RecyclerView
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ListePlantesArroserAujourdhuiRecycleAdapter ( val context : Context , val listeDesPlantes: MutableList<TablePlante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    //    // Parametres du constructeur : la liste mutable de plantes, les couleurs couleurPaire, couleurImpair (en tant que Int)
+    // Parametres du constructeur : la liste mutable de plantes, les couleurs couleurPaire, couleurImpair (en tant que Int)
+
     val checked = ArrayList<TablePlante>()
 
     class VH(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -16,10 +20,55 @@ class ListePlantesArroserAujourdhuiRecycleAdapter ( val context : Context , val 
     /* removeChecked() est appelé pour supprimer les items "checked" de l'adapter
     * Cette fonction n'existe pas dans la classe RecyclerView.Adapter mais
     * mais j'en ai besoin dans mon Activity */
-    fun removeChecked() {
+    fun updateChecked(bd: PlantesBD, nomsDesMois : Array<String>) {
+        for(i in checked.indices) {
+            val prochainArosage : Calendar = Calendar.getInstance()
+            prochainArosage.set(Calendar.DAY_OF_YEAR, prochainArosage.get(Calendar.DAY_OF_YEAR) + 1)
+            listeDesPlantes[i].dateProchainArosage = prochainArosage
+
+            val t2 = Thread{
+                val result : Int = bd.myDao().updatePlante(listeDesPlantes[i])
+                // Log.d("result", result.toString())
+            }
+            t2.start()
+            t2.join()
+        }
         listeDesPlantes.removeAll(checked)
         checked.clear()
         notifyDataSetChanged()
+        arrosagesEffectues(bd, nomsDesMois)
+    }
+
+    fun arrosagesEffectues(bd: PlantesBD, nomsDesMois : Array<String>) {
+        for(i in listeDesPlantes.indices) {
+            var listeDesFrequences : Array<Frequence> = arrayOf() // Le Array de frequences de la plante i
+            val t = Thread{ listeDesFrequences = bd.myDao().loadFrequencesById( listeDesPlantes[i].idPlante ) }
+            t.start()
+            t.join()
+
+            var dateAujourdhui : Calendar = Calendar.getInstance()
+            val moisEnCours : Int = dateAujourdhui.get(Calendar.MONTH) + 1
+            var frequenceActuelle : Int = 0
+
+            for(j in listeDesFrequences.indices) {
+                if ((moisEnCours >= nomsDesMois.indexOf(listeDesFrequences[j].dateDebut)) &&  (moisEnCours <= nomsDesMois.indexOf(listeDesFrequences[j].dateFin)))
+                    frequenceActuelle = listeDesFrequences[j].nbFois.toInt()
+            }
+
+            val prochainArosage : Calendar = Calendar.getInstance()
+            prochainArosage.set(Calendar.DAY_OF_YEAR, prochainArosage.get(Calendar.DAY_OF_YEAR) + frequenceActuelle)
+            listeDesPlantes[i].dateProchainArosage = prochainArosage
+
+            val t2 = Thread{
+                val result : Int = bd.myDao().updatePlante(listeDesPlantes[i])
+                // Log.d("result", result.toString())
+            }
+            t2.start()
+            t2.join()
+
+            listeDesPlantes.remove(listeDesPlantes[i])
+            notifyDataSetChanged()
+        }
     }
 
     // RecyclerView apelle onCreateViewHolder quand il a besoin d'un nouveau couple (View, Holder)

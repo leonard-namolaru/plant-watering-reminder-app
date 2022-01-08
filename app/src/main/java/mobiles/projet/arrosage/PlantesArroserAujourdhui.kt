@@ -58,7 +58,36 @@ class PlantesArroserAujourdhui : AppCompatActivity() {
     }
 
     fun supprimer(button: View) {
-        // Appeler la fonction de Adapter qui supprime tous les items dans l'état "checked"
-        adapter.removeChecked()
+        // Récupéerer l'instance vers la base de données
+        val bd = PlantesBD.getDatabase(application)
+
+        // créer une liste de Strings à partir de fichier ressources (resources : une propriété d'Activity)
+        val nomsDesMois: Array<String> =  resources.getStringArray(R.array.mois)
+
+        // Appeler la fonction de Adapter qui update tous les items dans l'état "checked"
+        adapter.updateChecked(bd, nomsDesMois)
     }
+
+    fun arrosagesEffectues(view: View) {
+        // Récupéerer l'instance vers la base de données
+        val bd = PlantesBD.getDatabase(application)
+
+        // créer une liste de Strings à partir de fichier ressources (resources : une propriété d'Activity)
+        val nomsDesMois: Array<String> =  resources.getStringArray(R.array.mois)
+
+        adapter.arrosagesEffectues(bd, nomsDesMois)
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        // Récupéerer l'instance vers la base de données
+        val bd = PlantesBD.getDatabase(application)
+
+        // créer une liste de Strings à partir de fichier ressources (resources : une propriété d'Activity)
+        val nomsDesMois: Array<String> =  resources.getStringArray(R.array.mois)
+
+        adapter.arrosagesEffectues(bd, nomsDesMois)
+    }
+
 }
