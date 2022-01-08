@@ -15,7 +15,7 @@ import androidx.core.app.NotificationCompat
 
 class MyService : Service() {
     companion object { /* définir les constantes */
-        const val notId = 9
+        const val notId = 10
         const val CHANNEL_ID = "message urgent"
     }
 
@@ -43,9 +43,8 @@ class MyService : Service() {
             .setContentText("Liste des plantes à arroser aujourd'hui. Pour accéder à la liste, cliquez ici")
             .setContentIntent(pendingIntent)
             .setAutoCancel(true) // la notification disparaît quand utilisateur...
-            .setSmallIcon(R.drawable.ic_add) // SmallIcon est obligatoire, ic_add ; TEST
+            .setSmallIcon(R.drawable.ic_home) // SmallIcon est obligatoire, ic_add ; TEST
             .setPriority(NotificationCompat.PRIORITY_DEFAULT) // priority concerne les version android <= 7.1, à partir de la version 8 c'est le channel qui est utilisé
-            .setLargeIcon( BitmapFactory.decodeResource( resources, R.drawable.ic_add ) ) // prend un bitmap en paramètre, ic_add ; TEST
             .build()
 
         /* envoi de notification */
