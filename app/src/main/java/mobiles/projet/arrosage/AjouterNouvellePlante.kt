@@ -63,8 +63,8 @@ class AjouterNouvellePlante : AppCompatActivity() {
     fun valider(button: View){
         val bd = PlantesBD.getDatabase(application).myDao()
 
-        var prochainArosage : Calendar = Calendar.getInstance()
-        val moisEnCours : Int = prochainArosage.get(Calendar.MONTH)
+        var dateAujourdhui : Calendar = Calendar.getInstance()
+        val moisEnCours : Int = dateAujourdhui.get(Calendar.MONTH)
         var frequenceActuelle : Int = 0
 
 
@@ -198,9 +198,18 @@ class AjouterNouvellePlante : AppCompatActivity() {
             return
         }
 
+        if(frequenceActuelle == 0) {
+            if(insertFrequence1)
+                frequenceActuelle = ((spinner1.selectedItemPosition - moisEnCours) * 30) - (dateAujourdhui.get(Calendar.DAY_OF_MONTH))
+            else if(insertFrequence2)
+                frequenceActuelle = ((spinner3.selectedItemPosition - moisEnCours) * 30) - (dateAujourdhui.get(Calendar.DAY_OF_MONTH))
+            else if(insertFrequence3)
+                frequenceActuelle = ((spinner5.selectedItemPosition - moisEnCours) * 30) - (dateAujourdhui.get(Calendar.DAY_OF_MONTH))
+        }
 
         // Insertion
         var t = Thread {
+            val prochainArosage : Calendar = Calendar.getInstance()
             prochainArosage.set(Calendar.DAY_OF_YEAR, prochainArosage.get(Calendar.DAY_OF_YEAR) + frequenceActuelle)
             bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/, dateProchainArosage = prochainArosage))
 
