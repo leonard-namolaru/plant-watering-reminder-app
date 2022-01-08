@@ -3,7 +3,6 @@ package mobiles.projet.arrosage
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
@@ -23,8 +22,6 @@ class AffichePlante : AppCompatActivity() {
 
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.setDisplayHomeAsUpEnabled(true)
-
-
 
         binding = ActivityAffichePlanteBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -51,7 +48,6 @@ class AffichePlante : AppCompatActivity() {
         recyclerView.hasFixedSize() /* pour améliorer les pérformances*/
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-
         if(planteId != null) {
             // BDD
             val bd = PlantesBD.getDatabase(application)
@@ -62,10 +58,6 @@ class AffichePlante : AppCompatActivity() {
             }
             t.start()
             t.join()
-
-
-
-
 
             val couleurPaire: Int = ResourcesCompat.getColor(resources, R.color.couleurPaire, null)
             val couleurImpaire: Int = ResourcesCompat.getColor(resources, R.color.couleurImpaire, null)

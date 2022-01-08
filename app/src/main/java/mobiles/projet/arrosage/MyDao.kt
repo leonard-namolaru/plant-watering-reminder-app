@@ -1,4 +1,5 @@
 package mobiles.projet.arrosage
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import java.util.*
 
@@ -9,6 +10,9 @@ interface MyDao {
 
     @Insert(onConflict= OnConflictStrategy.REPLACE)
     fun insertFrequence(vararg freq : Frequence): List<Long> // la liste des fréquences déja insérées
+
+    @Query("SELECT * FROM TablePlante")
+    fun loadAllLive(): LiveData< List<TablePlante> >
 
     /**
      * La méthode loadAll fait une requête SELECT

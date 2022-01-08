@@ -2,6 +2,7 @@ package mobiles.projet.arrosage
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: MutableList<TablePlante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    // Parametres du constructeur : la liste mutable de plantes, les couleurs couleurPaire, couleurImpair (en tant que Int)
+class ListePlantesRecycleAdapter (val context : Context, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var listeDesPlantes: List<TablePlante> = listOf()
 
     class VH(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -59,4 +60,12 @@ class ListePlantesRecycleAdapter ( val context : Context , val listeDesPlantes: 
     }
 
     override fun getItemCount(): Int = listeDesPlantes.size
+
+    // Remplacer la liste de tous les plantes par une nouvelle liste
+    fun setPlantes( plantes: List<TablePlante>){
+        listeDesPlantes = plantes
+        notifyDataSetChanged()  // demander que le RecyclerView affiche la nouvelle liste
+    }
+
 }
+

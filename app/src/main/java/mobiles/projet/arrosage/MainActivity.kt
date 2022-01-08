@@ -9,9 +9,13 @@ import android.media.MediaParser.SeekPoint.START
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
@@ -26,36 +30,20 @@ class MainActivity : AppCompatActivity() {
         recyclerView.hasFixedSize() /* pour améliorer les pérformances*/
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-
-
-        // 1er étape avant la création de la bd
-        /*  créer une liste de Strings à partir de fichier ressources
-            //var listeDesPlantes : MutableList<Plante> = mutableListOf<Plante>()
-           // créer une liste de Strings à partir de fichier ressources (resources : une propriété d'Activity)
-            val nomsDesPlantes: Array<String> =  resources.getStringArray(R.array.plantes)
-
-            for(i in nomsDesPlantes.indices)
-                listeDesPlantes.add( Plante(nomsDesPlantes[i]) )  pour créer les plantes
-         */
-
-        // Récupéerer l'instance vers la base de données
-        val bd = PlantesBD.getDatabase(application) //
-
-        // Le Array des plantes  à afficher dans RecyclerView
-        var listeDesPlantes : Array<TablePlante> = arrayOf() // on a declaré une liste de plantes qu'on va recupéerer pour l'afficher dans recycler view
-
-        // on remplit le Array des plantes a affciher a partir de la bd avec le loadAll()
-        val t= Thread{ listeDesPlantes = bd.myDao().loadAll() }
-        t.start()  // loadall  fait  :    "SELECT * FROM TablePlante" et renvoie un Array<TablePlante>
-        t.join()
-
-        var listePourAffichage : MutableList<TablePlante> = listeDesPlantes.toMutableList()
         val couleurPaire: Int = ResourcesCompat.getColor(resources, R.color.couleurPaire, null)
         val couleurImpaire: Int = ResourcesCompat.getColor(resources, R.color.couleurImpaire, null)
 
 
-        var adapter: ListePlantesRecycleAdapter = ListePlantesRecycleAdapter( this@MainActivity , listePourAffichage, couleurPaire, couleurImpaire)
+        var adapter: ListePlantesRecycleAdapter = ListePlantesRecycleAdapter( this@MainActivity, couleurPaire, couleurImpaire)
         recyclerView.adapter = adapter
+
+        val bd = PlantesBD.getDatabase(application) // Récupéerer l'instance vers la base de données
+        var listeDesPlantes : LiveData<List<TablePlante>> = bd.myDao().loadAllLive()  // La liste des plantes  à afficher dans RecyclerView
+
+        /* quand model.authors change mettre à jour la liste d'auteurs dans adapter */
+        listeDesPlantes.observe(this) {listePlantes: List<TablePlante> ->
+            adapter.setPlantes(listePlantes)
+        }
 
         /* **** Une alarme qui se déclenche périodiquement chaque 24h. **** */
 
@@ -70,8 +58,6 @@ class MainActivity : AppCompatActivity() {
         /* récupérer la référence vers AlarmManager */
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-         /* alarm sera déclenché dans sec secondes (à peu près, ce n'est pas une alarme exacte */
-        //alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 10 * 1000, pendingIntent) // 10 sec
         val calendar: Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, 7)
