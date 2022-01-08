@@ -198,19 +198,27 @@ class AjouterNouvellePlante : AppCompatActivity() {
             return
         }
 
+        val prochainArosage : Calendar = Calendar.getInstance()
+        prochainArosage.set(Calendar.DAY_OF_YEAR, prochainArosage.get(Calendar.DAY_OF_YEAR) + frequenceActuelle)
+
         if(frequenceActuelle == 0) {
-            if(insertFrequence1)
-                frequenceActuelle = ((spinner1.selectedItemPosition - moisEnCours) * 30) - (dateAujourdhui.get(Calendar.DAY_OF_MONTH))
-            else if(insertFrequence2)
-                frequenceActuelle = ((spinner3.selectedItemPosition - moisEnCours) * 30) - (dateAujourdhui.get(Calendar.DAY_OF_MONTH))
-            else if(insertFrequence3)
-                frequenceActuelle = ((spinner5.selectedItemPosition - moisEnCours) * 30) - (dateAujourdhui.get(Calendar.DAY_OF_MONTH))
+            if(insertFrequence1) {
+                val annee : Int = ( if (moisEnCours < spinner1.selectedItemPosition) dateAujourdhui.get(Calendar.YEAR) else (dateAujourdhui.get(Calendar.YEAR) + 1))
+                prochainArosage.set(annee  , spinner1.selectedItemPosition, 1) // set(int year, int month, int date)
+
+            } else if(insertFrequence2) {
+                val annee : Int = ( if (moisEnCours < spinner3.selectedItemPosition) dateAujourdhui.get(Calendar.YEAR) else (dateAujourdhui.get(Calendar.YEAR) + 1))
+                prochainArosage.set(annee  , spinner3.selectedItemPosition, 1) // set(int year, int month, int date)
+
+            } else if(insertFrequence3) {
+                val annee : Int = ( if (moisEnCours < spinner5.selectedItemPosition) dateAujourdhui.get(Calendar.YEAR) else (dateAujourdhui.get(Calendar.YEAR) + 1))
+                prochainArosage.set(annee  , spinner5.selectedItemPosition, 1) // set(int year, int month, int date)
+
+            }
         }
 
         // Insertion
         var t = Thread {
-            val prochainArosage : Calendar = Calendar.getInstance()
-            prochainArosage.set(Calendar.DAY_OF_YEAR, prochainArosage.get(Calendar.DAY_OF_YEAR) + frequenceActuelle)
             bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/, dateProchainArosage = prochainArosage))
 
             val lesPlantes : Array<TablePlante> = bd.loadAll() // Récupérer toutes les plantes
