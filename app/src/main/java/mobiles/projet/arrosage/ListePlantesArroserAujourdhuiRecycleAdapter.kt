@@ -1,17 +1,14 @@
 package mobiles.projet.arrosage
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckedTextView
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class ListePlantesArroserAujourdhuiRecycleAdapter ( val context : Context , val listeDesPlantes: MutableList<TablePlante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    // Parametres du constructeur : la liste mutable de plantes, les couleurs couleurPaire, couleurImpair (en tant que Int)
+    //    // Parametres du constructeur : la liste mutable de plantes, les couleurs couleurPaire, couleurImpair (en tant que Int)
     val checked = ArrayList<TablePlante>()
 
     class VH(itemView: View) : RecyclerView.ViewHolder(itemView)
