@@ -2,6 +2,8 @@ package mobiles.projet.arrosage
 
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.getIntent
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -53,6 +55,11 @@ class ListePlantesRecycleAdapter (val context : Context, val couleurPaire: Int, 
         val textViewPourNom: TextView = holder.itemView.findViewById(R.id.nom) as TextView
         val imageViewPourPlante: ImageView = holder.itemView.findViewById(R.id.photoPlante) as ImageView
 
+
+
+        val s=listeDesPlantes[position].lienPhotoDeLaPlante
+        val localUri = Uri.parse(s)
+        imageViewPourPlante.setImageURI(localUri)
         textViewPourNom.text = listeDesPlantes[position].nomCommun + " "
             if (position % 2 == 0)
                 holder.itemView.setBackgroundColor(couleurPaire)

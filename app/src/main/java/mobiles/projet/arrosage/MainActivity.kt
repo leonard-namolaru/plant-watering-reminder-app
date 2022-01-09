@@ -40,10 +40,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val s=intent.getExtras()?.getString("photoPlante")
-
-        val localUri = Uri.parse(s)
-        //binding..setImageURI(localUri)
         // On utilise la classe ActivityMainBinding pour créer
         // un objet binding de cette classe à l'aide de la méthode inflate().
         binding = ActivityMainBinding.inflate(layoutInflater)
