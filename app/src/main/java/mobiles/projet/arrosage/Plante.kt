@@ -8,8 +8,8 @@ data class Plante (
     var idPlante : Int=0, // NOT NULL
     var nomCommun: String, // NOT NULL
     var nomLatin: String?,
-    var dateProchainArosage: Calendar
-    //var lienPhotoDeLaPlante: String?
+    var dateProchainArosage: Calendar?,
+    var lienPhotoDeLaPlante: String?
 )
 
 
