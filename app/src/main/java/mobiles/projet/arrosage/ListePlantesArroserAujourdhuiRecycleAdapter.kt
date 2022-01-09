@@ -1,25 +1,37 @@
+/*
+ * ListePlantesArroserAujourdhuiRecycleAdapter.kt
+ * Projet : Application rappels d'arrosage pour plantes - UE Programmation des Composants Mobiles 2021 - 2022
+ * M1 : Master Informatique fondamentale et appliquée - Université de Paris.
+ * @author AIT BENALI faycal, NAMOLARU leonard
+ */
 package mobiles.projet.arrosage
 
 import android.content.Context
-import android.util.Log
+// import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckedTextView
 import androidx.recyclerview.widget.RecyclerView
-import java.util.*
+import java.util.Calendar
 import kotlin.collections.ArrayList
 
+/**
+ * @param context
+ * @param listeDesPlantes la liste mutable de plantes
+ * @param couleurPaire  en tant que Int
+ * @param couleurImpair en tant que Int
+ */
 class ListePlantesArroserAujourdhuiRecycleAdapter ( val context : Context , val listeDesPlantes: MutableList<TablePlante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    // Parametres du constructeur : la liste mutable de plantes, les couleurs couleurPaire, couleurImpair (en tant que Int)
-
     val checked = ArrayList<TablePlante>()
 
     class VH(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    /* removeChecked() est appelé pour supprimer les items "checked" de l'adapter
-    * Cette fonction n'existe pas dans la classe RecyclerView.Adapter mais
-    * mais j'en ai besoin dans mon Activity */
+    /**
+     * La fonction removeChecked() est appelé pour supprimer les items "checked" de l'adapter
+     * @param bd Instance vers la base de données
+     * @param nomsDesMois une liste de Strings avec la liste des mois
+     */
     fun updateChecked(bd: PlantesBD, nomsDesMois : Array<String>) {
         for(i in checked.indices) {
             val prochainArosage : Calendar = Calendar.getInstance()
@@ -106,7 +118,6 @@ class ListePlantesArroserAujourdhuiRecycleAdapter ( val context : Context , val 
          * holder.itemView cest la View associee a ce holder
          */
         val checkedTextViewPourNom: CheckedTextView = holder.itemView.findViewById(R.id.nom) as CheckedTextView
-       // val imageViewPourPlante: ImageView = holder.itemView.findViewById(R.id.photoPlante) as ImageView
 
         checkedTextViewPourNom.text = listeDesPlantes[position].nomCommun + " "
         if (position % 2 == 0)

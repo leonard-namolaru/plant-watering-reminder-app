@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root) // binding.root est la référence vers le layout à la racine.
 
-        // récupérer la référence vers RecyclerView qui se trouve dans activity_main.xml
-        val recyclerView = binding.recycler as RecyclerView
+        // récupérer la référence vers le RecyclerView qui se trouve dans activity_main.xml
+        val recyclerView = binding.recycler
         recyclerView.hasFixedSize() // Pour améliorer les pérformances
         recyclerView.layoutManager = LinearLayoutManager(this)
 
