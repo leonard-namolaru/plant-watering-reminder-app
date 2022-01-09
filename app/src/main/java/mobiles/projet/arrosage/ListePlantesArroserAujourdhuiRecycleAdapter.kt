@@ -51,8 +51,10 @@ class ListePlantesArroserAujourdhuiRecycleAdapter ( val context : Context , val 
             var frequenceActuelle : Int = 0
 
             for(j in listeDesFrequences.indices) {
-                if ((moisEnCours >= nomsDesMois.indexOf(listeDesFrequences[j].dateDebut)) &&  (moisEnCours <= nomsDesMois.indexOf(listeDesFrequences[j].dateFin)))
+                if ((moisEnCours >= nomsDesMois.indexOf(listeDesFrequences[j].dateDebut)) &&  (moisEnCours <= nomsDesMois.indexOf(listeDesFrequences[j].dateFin))){
                     frequenceActuelle = listeDesFrequences[j].nbFois.toInt()
+                    break
+                }
             }
 
             val prochainArosage : Calendar = Calendar.getInstance()

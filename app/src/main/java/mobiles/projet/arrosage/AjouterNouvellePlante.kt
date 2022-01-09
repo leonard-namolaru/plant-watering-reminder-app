@@ -162,7 +162,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
                     return
                 }
 
-                if (moisEnCours >= spinner3.selectedItemPosition && moisEnCours <= spinner4.selectedItemPosition)
+                if ( (frequenceActuelle == 0) && ( (moisEnCours >= spinner3.selectedItemPosition) && (moisEnCours <= spinner4.selectedItemPosition) ) )
                     frequenceActuelle = freq2.toInt()
 
                 insertFrequence2 = true
@@ -179,12 +179,12 @@ class AjouterNouvellePlante : AppCompatActivity() {
                     return
                 }
 
-                if ((spinner5.selectedItemPosition < spinner4.selectedItemPosition) || (spinner6.selectedItemPosition >= spinner5.selectedItemPosition)) {
+                if ((spinner5.selectedItemPosition < spinner4.selectedItemPosition) || (spinner5.selectedItemPosition >= spinner6.selectedItemPosition)) {
                     Toast.makeText(this, "Fréquence 3 : Le mois de fin doit être supérieur au mois de début et les deux doivent toujours être supérieurs aux mois de fréquence 2", Toast.LENGTH_LONG).show()
                     return
                 }
 
-                if (moisEnCours >= spinner5.selectedItemPosition && moisEnCours <= spinner6.selectedItemPosition)
+                if ( (frequenceActuelle == 0) && ( (moisEnCours >= spinner5.selectedItemPosition) && (moisEnCours <= spinner6.selectedItemPosition) ) )
                     frequenceActuelle = freq3.toInt()
 
                 insertFrequence3 = true
