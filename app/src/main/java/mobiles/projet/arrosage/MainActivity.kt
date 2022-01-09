@@ -59,10 +59,10 @@ class MainActivity : AppCompatActivity() {
         /* **** AFFICHAGE DE LA LISTE DES PLANTES **** */
 
         val bd = PlantesBD.getDatabase(application) // Récupéerer l'instance vers la base de données
-        var listeDesPlantes : LiveData<List<TablePlante>> = bd.myDao().loadAllLive()  // La liste des plantes à afficher dans RecyclerView
+        var listeDesPlantes : LiveData<List<Plante>> = bd.myDao().loadAllLive()  // La liste des plantes à afficher dans RecyclerView
 
         /* Quand listeDesPlantes change : mettre à jour la liste de plantes dans adapter */
-        listeDesPlantes.observe(this) { listePlantes: List<TablePlante> -> adapter.setPlantes(listePlantes) }
+        listeDesPlantes.observe(this) { listePlantes: List<Plante> -> adapter.setPlantes(listePlantes) }
 
 
         /* **** UNE ALARME QUI SE DÉCLENCHE PÉRIODIQUEMENT CHAQUE 24H **** */

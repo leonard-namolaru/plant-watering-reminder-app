@@ -36,7 +36,7 @@ class PlantesArroserAujourdhui : AppCompatActivity() {
         // Récupéerer l'instance vers la base de données
         val bd = PlantesBD.getDatabase(application)
 
-        var listeDesPlantes : Array<TablePlante> = arrayOf() // Le Array avec tous les plantes de la BDD
+        var listeDesPlantes : Array<Plante> = arrayOf() // Le Array avec tous les plantes de la BDD
         val t= Thread{ listeDesPlantes = bd.myDao().loadAll() }
         t.start()  // loadall  fait : "SELECT * FROM TablePlante" et renvoie un Array<TablePlante>
         t.join()
@@ -45,7 +45,7 @@ class PlantesArroserAujourdhui : AppCompatActivity() {
          * et maintenant nous voulons afficher uniquement les plantes qui doivent être arrosées aujourd'hui
          */
 
-        var listePourAffichage : MutableList<TablePlante> = mutableListOf()
+        var listePourAffichage : MutableList<Plante> = mutableListOf()
         for(plante in listeDesPlantes) { // Nous parcourons la liste complète des plantes
             val ajd : Calendar = Calendar.getInstance() // Obtenir la date d'aujourd'hui
             val jour = ajd.get(Calendar.DAY_OF_MONTH) == plante.dateProchainArosage.get(Calendar.DAY_OF_MONTH)

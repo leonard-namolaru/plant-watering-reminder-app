@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class ListePlantesRecycleAdapter (val context : Context, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var listeDesPlantes: List<TablePlante> = listOf()
+    private var listeDesPlantes: List<Plante> = listOf()
 
     class VH(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -28,7 +28,7 @@ class ListePlantesRecycleAdapter (val context : Context, val couleurPaire: Int, 
         // Installer le meme listener sur chaqaue View
         v.setOnClickListener( View.OnClickListener {
            val plantePosition: Int = holder.absoluteAdapterPosition // récuperer la position sur la quelle on a cliqué
-            val plante: TablePlante = listeDesPlantes[plantePosition]
+            val plante: Plante = listeDesPlantes[plantePosition]
 
             val intent = Intent(context , AffichePlante::class.java)
             intent.putExtra("id", plante.idPlante)
@@ -62,7 +62,7 @@ class ListePlantesRecycleAdapter (val context : Context, val couleurPaire: Int, 
     override fun getItemCount(): Int = listeDesPlantes.size
 
     // Remplacer la liste de tous les plantes par une nouvelle liste
-    fun setPlantes( plantes: List<TablePlante>){
+    fun setPlantes( plantes: List<Plante>){
         listeDesPlantes = plantes
         notifyDataSetChanged()  // demander que le RecyclerView affiche la nouvelle liste
     }

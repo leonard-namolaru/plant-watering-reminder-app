@@ -22,8 +22,8 @@ import kotlin.collections.ArrayList
  * @param couleurPaire  en tant que Int
  * @param couleurImpair en tant que Int
  */
-class ListePlantesArroserAujourdhuiRecycleAdapter ( val context : Context , val listeDesPlantes: MutableList<TablePlante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    val checked = ArrayList<TablePlante>()
+class ListePlantesArroserAujourdhuiRecycleAdapter ( val context : Context , val listeDesPlantes: MutableList<Plante>, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    val checked = ArrayList<Plante>()
 
     class VH(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -97,7 +97,7 @@ class ListePlantesArroserAujourdhuiRecycleAdapter ( val context : Context , val 
         // Installer le meme listener sur chaqaue View
         v.setOnClickListener( View.OnClickListener { view ->
             val plantePosition: Int = holder.absoluteAdapterPosition // récuperer la position sur la quelle on a cliqué
-            val plante: TablePlante = listeDesPlantes[plantePosition]
+            val plante: Plante = listeDesPlantes[plantePosition]
             val w = view as CheckedTextView
             w.toggle() // Changer l'état  de la vue à l'inverse de son état actuel
             if (w.isChecked) {

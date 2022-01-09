@@ -12,7 +12,7 @@ import androidx.room.*
 @Dao
 interface MyDao {
     @Insert(onConflict= OnConflictStrategy.REPLACE)
-    fun insertPlante(vararg plante :TablePlante): List<Long> // la liste des id des éléments insérés
+    fun insertPlante(vararg plante :Plante): List<Long> // la liste des id des éléments insérés
 
     @Insert(onConflict= OnConflictStrategy.REPLACE)
     fun insertFrequence(vararg freq : Frequence): List<Long> // la liste des fréquences déja insérées
@@ -21,11 +21,11 @@ interface MyDao {
      * La méthode loadAll fait une requête SELECT
      * qui retourne un Array<TablePlante> avec tous les plantes.
      */
-    @Query("SELECT * FROM TablePlante") // L'annotation Query contient une requête select et cette requete renvoie tt sur la table plante et renvoie une chaine de tables plantes
-    fun loadAll(): Array<TablePlante> // La fonction qui exécute select retourne un Array d'objets plante
+    @Query("SELECT * FROM Plante") // L'annotation Query contient une requête select et cette requete renvoie tt sur la table plante et renvoie une chaine de tables plantes
+    fun loadAll(): Array<Plante> // La fonction qui exécute select retourne un Array d'objets plante
 
-    @Query("SELECT * FROM TablePlante")
-    fun loadAllLive(): LiveData< List<TablePlante> >
+    @Query("SELECT * FROM Plante")
+    fun loadAllLive(): LiveData< List<Plante> >
 
     /**
      * La méthode loadFrequencesById(id) retourne un Array<Frequence> avec tous les frequences d'une plante
@@ -34,5 +34,5 @@ interface MyDao {
     fun loadFrequencesById(vararg id: Int): Array<Frequence> // Requête paramétrée : dans la requete le nom de paramètre de la fonction précédé par :
 
     @Update
-    fun updatePlante(vararg plante :TablePlante) : Int // La valeur de retour donne le nombre d'items modifiés par update.
+    fun updatePlante(vararg plante :Plante) : Int // La valeur de retour donne le nombre d'items modifiés par update.
 }

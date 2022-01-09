@@ -9,7 +9,7 @@ import androidx.room.*
 
 
 // définir la base de données
-@Database(entities = [TablePlante::class, Frequence::class], version = 11) // version : The database version.
+@Database(entities = [Plante::class, Frequence::class], version = 12) // version : The database version.
 
 
 @TypeConverters(Converters::class)
@@ -33,7 +33,7 @@ abstract class PlantesBD : RoomDatabase() { // Une classe pour representer la ba
         fun getDatabase( context : Context): PlantesBD{
             if( instance != null )
                 return instance!! // the not-null assertion operator (!!) converts any value to a non-null type
-            val db = Room.databaseBuilder( context.applicationContext, PlantesBD::class.java, "TablePlante" ).fallbackToDestructiveMigration().build()
+            val db = Room.databaseBuilder( context.applicationContext, PlantesBD::class.java, "PlantesBD" ).fallbackToDestructiveMigration().build()
             instance = db
             return instance!!
         }

@@ -219,9 +219,9 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
         // Insertion
         var t = Thread {
-            bd.insertPlante( TablePlante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/, dateProchainArosage = prochainArosage))
+            bd.insertPlante( Plante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/, dateProchainArosage = prochainArosage))
 
-            val lesPlantes : Array<TablePlante> = bd.loadAll() // Récupérer toutes les plantes
+            val lesPlantes : Array<Plante> = bd.loadAll() // Récupérer toutes les plantes
             idPlanteDansBDD = lesPlantes.last().idPlante;
         }
         t.start()
