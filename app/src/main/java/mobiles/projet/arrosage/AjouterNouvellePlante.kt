@@ -1,45 +1,56 @@
 package mobiles.projet.arrosage
 
+import android.content.Context
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import mobiles.projet.arrosage.databinding.ActivityAjouterNouvellePlanteBinding
-import android.util.Log
 import android.view.View
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.core.text.isDigitsOnly
+import java.io.File
 import java.util.Calendar
-
-//import android.app.Activity
-//import androidx.room.PrimaryKey
-//import android.content.Intent
-//import org.jcp.xml.dsig.internal.dom.DOMKeyInfo.getContent
-//import java.io.File
 
 class AjouterNouvellePlante : AppCompatActivity() {
     private lateinit var binding: ActivityAjouterNouvellePlanteBinding
+    var localUri : Uri? = null // propriété : Uri de fichier local
 
-    /* propriété : Uri de fichier local */
-    var localUri : Uri? = null
-    /* la propriété getContent pour enregistrer une méthode callback
-    * appelée au retour de la nouvelle activité.
-    * Ici cette méthode callback est implementée par une lambda qui
-    * qui obtient l’Uri de l’image comme paramètre. */
-    // val getContent = registerForActivityResult(ActivityResultContracts
-    //     .GetContent())
+    // getContent : une propriété  pour enregistrer une méthode callback appelée au retour de la nouvelle activité.
+    var getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        // Méthode callback qui obtient l’Uri de l’image comme paramètre
+        
+        if( uri == null ) return@registerForActivityResult // Si uri null rien à faire
 
-    /* { uri: Uri? ->
-        if( uri == null ) return@registerForActivityResult
-            /* à faire :
-            * si uri de l’image différent de null alors copier l’image dans
-            la
-            * mémoire interne de l’appareil et mémoriser l’emplacement de l
-            ’image
-            * copiée dans la base de données.
-            */
-       }
-     */
+        // Si uri de l’image différent de null :
+        // Dans le code ci-dessous le nom de ce fichier local est composé de String "plante" auquel on concatène un numéro
+
+        val inputStream = getContentResolver().openInputStream(uri) // inputStream avec l’image de la plante
+        val fileNamePrefix = "plante"; // Fabriquer le nom de fichier local pour stocker l’image
+        val preferences = getSharedPreferences("numImage", Context.MODE_PRIVATE) // Le numéro de l'image est stocké dans SharedPreferences
+        val numImage = preferences.getInt("numImage", 1)
+        val fileName = "$fileNamePrefix$numImage"
+
+        // Ouvrir outputStream vers un fichier local
+        val file = File(this.filesDir, fileName)
+        val outputStream = file.outputStream()
+
+        preferences.edit().putInt("numImage",numImage+1).commit() // Sauvegarder le nouveau compteur d’image
+        inputStream?.copyTo(outputStream) // Copier inputStream qui pointe sur l’image de la galerie vers le fichier local
+        localUri = file.toUri() // Mémoriser Uri de fichier local dans la propriété localUri
+
+        outputStream.close()
+        inputStream?.close()
+
+        binding.lienPic.text = "Image enregistrée"
+    }
+
+    fun utiliserImageDeLaGalerieDimage(button: View) {
+        getContent.launch("image/*")
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -219,7 +230,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
         // Insertion
         var t = Thread {
-            bd.insertPlante( Plante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/, dateProchainArosage = prochainArosage))
+            bd.insertPlante( Plante( nomCommun =nomCom, nomLatin = nomLat /*, lienPhotoDeLaPlante = lien*/, dateProchainArosage = prochainArosage, lienPhotoDeLaPlante = localUri.toString() ))
 
             val lesPlantes : Array<Plante> = bd.loadAll() // Récupérer toutes les plantes
             idPlanteDansBDD = lesPlantes.last().idPlante;

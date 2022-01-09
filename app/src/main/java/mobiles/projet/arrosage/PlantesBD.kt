@@ -9,7 +9,7 @@ import androidx.room.*
 
 
 // définir la base de données
-@Database(entities = [Plante::class, Frequence::class], version = 12) // version : The database version.
+@Database(entities = [Plante::class, Frequence::class], version = 13) // version : The database version.
 
 
 @TypeConverters(Converters::class)

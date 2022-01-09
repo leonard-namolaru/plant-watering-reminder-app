@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 12,
-    "identityHash": "2ec83bf39cee27eab9105075c390c91f",
+    "identityHash": "a695c54ee1a0eaf2e0e14edd024ac1d9",
     "entities": [
       {
         "tableName": "Plante",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idPlante` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nomCommun` TEXT NOT NULL, `nomLatin` TEXT, `dateProchainArosage` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idPlante` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nomCommun` TEXT NOT NULL, `nomLatin` TEXT, `dateProchainArosage` INTEGER NOT NULL, `lienPhotoDeLaPlante` TEXT)",
         "fields": [
           {
             "fieldPath": "idPlante",
@@ -31,6 +31,12 @@
             "columnName": "dateProchainArosage",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "lienPhotoDeLaPlante",
+            "columnName": "lienPhotoDeLaPlante",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -90,7 +96,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2ec83bf39cee27eab9105075c390c91f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a695c54ee1a0eaf2e0e14edd024ac1d9')"
     ]
   }
 }
