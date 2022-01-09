@@ -11,6 +11,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -36,6 +37,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+
+
+        val s=intent.getExtras()?.getString("photoPlante")
+
+        val localUri = Uri.parse(s)
+        //binding..setImageURI(localUri)
         // On utilise la classe ActivityMainBinding pour créer
         // un objet binding de cette classe à l'aide de la méthode inflate().
         binding = ActivityMainBinding.inflate(layoutInflater)

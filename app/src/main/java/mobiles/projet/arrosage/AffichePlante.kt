@@ -28,13 +28,29 @@ class AffichePlante : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar!!.title= "Affichage Plante"
 
+        val bd = PlantesBD.getDatabase(application)
+
+
+
+        //val localUri = Uri.parse( s )
+        //imageView.setImageUri( localUri )
+
+
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.setDisplayHomeAsUpEnabled(true)
 
         binding = ActivityAffichePlanteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val intent = getIntent() //retourne Intent qui a fait démarrer l'activité
+
+        val s=intent.getExtras()?.getString("photoPlante")
+
+        val localUri = Uri.parse(s)
+        binding.photoPlante.setImageURI(localUri)
+
+
         val nomCommun : String?  = intent.getExtras()?.getString( "nomCommun" )
         val nomLatin : String?  = intent.getExtras()?.getString( "nomLatin" )
         val dateProchainArosage :Long ?= intent.getExtras()?.getLong("ProchainArosage")
@@ -58,7 +74,7 @@ class AffichePlante : AppCompatActivity() {
 
         if(planteId != null) {
             // BDD
-            val bd = PlantesBD.getDatabase(application)
+
             var listeDesFrequences : Array<Frequence> = arrayOf() // Le Array de frequences à afficher dans RecyclerView
             val t = Thread{
                 listeDesFrequences = bd.myDao().loadFrequencesById(planteId)
