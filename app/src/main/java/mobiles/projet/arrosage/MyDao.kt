@@ -30,8 +30,8 @@ interface MyDao {
     /**
      * La méthode loadFrequencesById(id) retourne un Array<Frequence> avec tous les frequences d'une plante
      */
-    @Query("SELECT * FROM Frequence WHERE IdPlante = :id ")
-    fun loadFrequencesById(vararg id: Int): Array<Frequence> // Requête paramétrée : dans la requete le nom de paramètre de la fonction précédé par :
+    @Query("SELECT * FROM Frequence WHERE IdPlante = :idPlante ")
+    fun loadFrequencesById(vararg idPlante: Int): Array<Frequence> // Requête paramétrée : dans la requete le nom de paramètre de la fonction précédé par :
 
     @Update
     fun updatePlante(vararg plante :Plante) : Int // La valeur de retour donne le nombre d'items modifiés par update.
