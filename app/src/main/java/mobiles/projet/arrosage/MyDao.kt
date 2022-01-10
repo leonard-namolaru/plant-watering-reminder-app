@@ -27,6 +27,12 @@ interface MyDao {
     @Query("SELECT * FROM Plante")
     fun loadAllLive(): LiveData< List<Plante> >
 
+    @Delete
+    fun deleteFromPlante(vararg plante : Plante):Int
+
+
+    @Delete
+    fun deleteFrequence(vararg freq: Frequence): Int
     /**
      * La méthode loadFrequencesById(id) retourne un Array<Frequence> avec tous les frequences d'une plante
      */

@@ -38,6 +38,7 @@ class ListePlantesRecycleAdapter (val context : Context, val couleurPaire: Int, 
             intent.putExtra("nomLatin", plante.nomLatin)
             intent.putExtra("photoPlante",plante.lienPhotoDeLaPlante)
             intent.putExtra("ProchainArosage", plante.dateProchainArosage.getTimeInMillis())
+            intent.putExtra("position",plantePosition)
 
             context.startActivity(intent) // on va lancer une autre actuvté en passant intent en parametre qui contient afficheplante (le fichier kt a lancer
         } )

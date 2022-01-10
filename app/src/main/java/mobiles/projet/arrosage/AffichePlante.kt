@@ -18,9 +18,19 @@ import mobiles.projet.arrosage.databinding.ActivityAffichePlanteBinding
 import java.io.File
 import java.util.*
 import androidx.activity.*
+import kotlin.concurrent.thread
 
 class AffichePlante : AppCompatActivity() {
     private lateinit var binding: ActivityAffichePlanteBinding
+    lateinit var plante :Plante
+
+    fun TimestampToCalendar(timeStamp: Long?): Calendar? {
+        var calendar : Calendar = Calendar.getInstance();
+        if(timeStamp != null)
+            calendar.setTimeInMillis(timeStamp)
+        return calendar
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,10 +64,20 @@ class AffichePlante : AppCompatActivity() {
         val nomCommun : String?  = intent.getExtras()?.getString( "nomCommun" )
         val nomLatin : String?  = intent.getExtras()?.getString( "nomLatin" )
         val dateProchainArosage :Long ?= intent.getExtras()?.getLong("ProchainArosage")
+        val lien : String?=  intent.getExtras()?.getString("photoPlante")
         val planteId : Int?  = intent.getExtras()?.getInt("id")
         if (nomCommun != null) binding.leNomCommun.text = nomCommun  // afichage
         if (nomLatin != null) binding.leNomLatin.text = nomLatin
+        if(planteId!=null && nomCommun!=null && nomLatin!=null && lien!=null ){
 
+            val id : Int = planteId!!
+            val nomC : String = nomCommun!!
+            val nomL: String = nomLatin!!
+            val dateP : Calendar =TimestampToCalendar(dateProchainArosage)!!
+            val lienP :String = lien
+            plante=Plante(idPlante = id,nomCommun=nomC,nomLatin=nomL, dateProchainArosage = dateP, lienPhotoDeLaPlante = lienP)
+
+        }
         if (dateProchainArosage!= null) {
             var prochainArosage : Calendar = Calendar.getInstance()
             prochainArosage.setTimeInMillis(dateProchainArosage)
@@ -100,10 +120,43 @@ class AffichePlante : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun supprimer(view: View){
+        val bd = PlantesBD.getDatabase(application)
+        binding = ActivityAffichePlanteBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val intent = getIntent() //retourne Intent qui a fait démarrer l'activité
+        val planteId : Int?  = intent.getExtras()?.getInt("id")
+        var listeDesFrequences : Array<Frequence> = arrayOf() // Le Array de frequences à afficher dans RecyclerView
+        if (planteId!=null){
+            val th = Thread{
+                listeDesFrequences = bd.myDao().loadFrequencesById(planteId)
+
+            }
+            th.start()
+            th.join()
+        }
+
+         val t= thread {
+
+             bd.myDao().deleteFromPlante(plante)
+             for(j in listeDesFrequences){
+                 bd.myDao().deleteFrequence(j)
+             }
+             val intent2 = Intent(this, MainActivity::class.java)
+             startActivity(intent2)
+         }
+        t.start()
+        t.join()
+
+
+
+
+
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
-
 
 }
