@@ -109,6 +109,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun exitApp(item: MenuItem) {
+        super.onDestroy()
+    }
+
     fun rechercheDePlantes(item: MenuItem) {
 
         if(binding.recherche.visibility == View.GONE) {

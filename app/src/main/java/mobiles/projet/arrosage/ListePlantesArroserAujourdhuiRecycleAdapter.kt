@@ -118,18 +118,9 @@ class ListePlantesArroserAujourdhuiRecycleAdapter ( val context : Context , val 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         /* Recuperer la View :
          * holder.itemView cest la View associee a ce holder
-
          */
 
-        val imageViewPourPlante: ImageView = holder.itemView.findViewById(R.id.photoPlante) as ImageView
-
-
-
-        val s=listeDesPlantes[position].lienPhotoDeLaPlante
-        val localUri = Uri.parse(s)
-        imageViewPourPlante.setImageURI(localUri)
         val checkedTextViewPourNom: CheckedTextView = holder.itemView.findViewById(R.id.nom) as CheckedTextView
-
         checkedTextViewPourNom.text = listeDesPlantes[position].nomCommun + " "
         if (position % 2 == 0)
             holder.itemView.setBackgroundColor(couleurPaire)

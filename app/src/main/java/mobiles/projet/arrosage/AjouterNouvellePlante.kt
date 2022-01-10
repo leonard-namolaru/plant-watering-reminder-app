@@ -187,10 +187,10 @@ class AjouterNouvellePlante : AppCompatActivity() {
                 Toast.makeText(this, "Les frequence doit etre un chiffre uniquement ", Toast.LENGTH_LONG).show()
                 return
             }else{  // Ça contient que des digit
-                if(freq1.toInt() < 1) {
-                    Toast.makeText(this, "Fréquence 1 : La fréquence doit être supérieure à zéro", Toast.LENGTH_LONG).show()
-                    return
-                }
+              //  if(freq1.toInt() < 1) {
+              //      Toast.makeText(this, "Fréquence 1 : La fréquence doit être supérieure à zéro", Toast.LENGTH_LONG).show()
+              //      return
+              //  }
 
                 if (spinner1.selectedItemPosition >= spinner2.selectedItemPosition) {
                     Toast.makeText(this, "Fréquence 1 : Le mois de fin doit être supérieur au mois de début", Toast.LENGTH_LONG).show()
@@ -259,7 +259,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
         prochainArosage.set(Calendar.DAY_OF_YEAR, prochainArosage.get(Calendar.DAY_OF_YEAR) + frequenceActuelle)
 
         // Traitement du cas où la première fréquence se produit dans un mois à venir
-        if(frequenceActuelle == 0) {
+    /*    if(frequenceActuelle == 0) {
             if(insertFrequence1) {
                 val annee : Int = ( if (moisEnCours < spinner1.selectedItemPosition) dateAujourdhui.get(Calendar.YEAR) else (dateAujourdhui.get(Calendar.YEAR) + 1))
                 prochainArosage.set(annee  , spinner1.selectedItemPosition, 1) // set(int year, int month, int date)
@@ -273,7 +273,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
                 prochainArosage.set(annee  , spinner5.selectedItemPosition, 1) // set(int year, int month, int date)
 
             }
-        }
+        } */
 
         // Insertion
         var t = Thread {
