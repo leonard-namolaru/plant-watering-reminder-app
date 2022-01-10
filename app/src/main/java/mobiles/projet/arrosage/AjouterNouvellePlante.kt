@@ -1,10 +1,16 @@
+/*
+ * AjouterNouvellePlante.kt
+ * Projet : Application rappels d'arrosage pour plantes - UE Programmation des Composants Mobiles 2021 - 2022
+ * M1 : Master Informatique fondamentale et appliquée - Université de Paris.
+ * @author AIT BENALI faycal, NAMOLARU leonard
+ */
+
 package mobiles.projet.arrosage
 
 import android.content.Context
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import mobiles.projet.arrosage.databinding.ActivityAjouterNouvellePlanteBinding
 import android.view.View
 import android.widget.Spinner
@@ -147,8 +153,8 @@ class AjouterNouvellePlante : AppCompatActivity() {
         var nomLat: String = binding.nomLatin.text.toString().trim()
 
         // Vérifier que les Strings obtenus ne soient pas vide
-        if(nomCom == "" && nomLat == "" ){
-            Toast.makeText(this, "Vous devez mentioner un nom ", Toast.LENGTH_LONG).show()
+        if(nomCom == ""){
+            Toast.makeText(this, "Vous devez mentioner un nom commun", Toast.LENGTH_LONG).show()
             return
         }
 
@@ -252,6 +258,7 @@ class AjouterNouvellePlante : AppCompatActivity() {
         val prochainArosage : Calendar = Calendar.getInstance()
         prochainArosage.set(Calendar.DAY_OF_YEAR, prochainArosage.get(Calendar.DAY_OF_YEAR) + frequenceActuelle)
 
+        // Traitement du cas où la première fréquence se produit dans un mois à venir
         if(frequenceActuelle == 0) {
             if(insertFrequence1) {
                 val annee : Int = ( if (moisEnCours < spinner1.selectedItemPosition) dateAujourdhui.get(Calendar.YEAR) else (dateAujourdhui.get(Calendar.YEAR) + 1))
