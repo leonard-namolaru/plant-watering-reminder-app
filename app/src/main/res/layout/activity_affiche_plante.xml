@@ -129,7 +129,7 @@
             android:paddingStart="16dp"
             android:layout_gravity="center"
             android:paddingEnd="12dp" />
-        <Button
+         <Button
             android:id="@+id/updateButton"
             android:layout_width="285dp"
             android:layout_height="40dp"
