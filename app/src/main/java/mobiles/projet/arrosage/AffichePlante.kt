@@ -22,7 +22,9 @@ import kotlin.concurrent.thread
 
 class AffichePlante : AppCompatActivity() {
     private lateinit var binding: ActivityAffichePlanteBinding
+    val model by lazy { ViewModelProvider(this).get(PlanteViewModel::class.java) }
     lateinit var plante :Plante
+    var listeDesFrequences : Array<Frequence> = arrayOf() // Le Array de frequences à afficher dans RecyclerView
 
     fun TimestampToCalendar(timeStamp: Long?): Calendar? {
         var calendar : Calendar = Calendar.getInstance();
@@ -30,7 +32,6 @@ class AffichePlante : AppCompatActivity() {
             calendar.setTimeInMillis(timeStamp)
         return calendar
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +41,8 @@ class AffichePlante : AppCompatActivity() {
 
         val bd = PlantesBD.getDatabase(application)
 
-
-
         //val localUri = Uri.parse( s )
         //imageView.setImageUri( localUri )
-
 
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.setDisplayHomeAsUpEnabled(true)
@@ -75,9 +73,10 @@ class AffichePlante : AppCompatActivity() {
             val nomL: String = nomLatin!!
             val dateP : Calendar =TimestampToCalendar(dateProchainArosage)!!
             val lienP :String = lien
-            plante=Plante(idPlante = id,nomCommun=nomC,nomLatin=nomL, dateProchainArosage = dateP, lienPhotoDeLaPlante = lienP)
+            plante = Plante(idPlante = id,nomCommun=nomC,nomLatin=nomL, dateProchainArosage = dateP, lienPhotoDeLaPlante = lienP)
 
         }
+
         if (dateProchainArosage!= null) {
             var prochainArosage : Calendar = Calendar.getInstance()
             prochainArosage.setTimeInMillis(dateProchainArosage)
@@ -94,8 +93,6 @@ class AffichePlante : AppCompatActivity() {
 
         if(planteId != null) {
             // BDD
-
-            var listeDesFrequences : Array<Frequence> = arrayOf() // Le Array de frequences à afficher dans RecyclerView
             val t = Thread{
                 listeDesFrequences = bd.myDao().loadFrequencesById(planteId)
 
@@ -121,37 +118,11 @@ class AffichePlante : AppCompatActivity() {
     }
 
     fun supprimer(view: View){
-        val bd = PlantesBD.getDatabase(application)
-        binding = ActivityAffichePlanteBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        val intent = getIntent() //retourne Intent qui a fait démarrer l'activité
-        val planteId : Int?  = intent.getExtras()?.getInt("id")
-        var listeDesFrequences : Array<Frequence> = arrayOf() // Le Array de frequences à afficher dans RecyclerView
-        if (planteId!=null){
-            val th = Thread{
-                listeDesFrequences = bd.myDao().loadFrequencesById(planteId)
+        model.removePlante(plante)
+        model.removePlanteFrequences(listeDesFrequences)
 
-            }
-            th.start()
-            th.join()
-        }
-
-         val t= thread {
-
-             bd.myDao().deleteFromPlante(plante)
-             for(j in listeDesFrequences){
-                 bd.myDao().deleteFrequence(j)
-             }
-             val intent2 = Intent(this, MainActivity::class.java)
-             startActivity(intent2)
-         }
-        t.start()
-        t.join()
-
-
-
-
-
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onSupportNavigateUp(): Boolean {

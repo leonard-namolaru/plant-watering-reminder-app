@@ -15,5 +15,15 @@ class PlanteViewModel(application: Application) : AndroidViewModel(application){
         Thread { plantes.postValue(dao.loadPartialName(nom)) }.start()
     }
 
+    // Supprimer une plante
+    fun removePlante(plante : Plante) {
+        Thread { dao.deleteFromPlante(plante) }.start()
+    }
+
+    // Supprimer les frequences d'une plante
+    fun removePlanteFrequences(listeDesFrequences : Array<Frequence>) {
+        Thread { for(frequence in listeDesFrequences) dao.deleteFrequence(frequence) }.start()
+    }
+
 
 }
