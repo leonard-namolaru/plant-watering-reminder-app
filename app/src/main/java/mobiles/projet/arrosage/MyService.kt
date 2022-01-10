@@ -1,3 +1,9 @@
+/*
+ * MyService.kt
+ * Projet : Application rappels d'arrosage pour plantes - UE Programmation des Composants Mobiles 2021 - 2022
+ * M1 : Master Informatique fondamentale et appliquée - Université de Paris.
+ * @author AIT BENALI faycal, NAMOLARU leonard
+ */
 package mobiles.projet.arrosage
 
 import android.app.NotificationChannel
@@ -30,8 +36,7 @@ class MyService : Service() {
     //onStartCommand() ou onBind())
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate() {
-        Log.d("onCreate()","onCreate()")
-        Toast.makeText(this, "ALARM !!!!!", Toast.LENGTH_LONG).show();
+        Log.d("alarmManager","L'alarme s'est déclenchée")
         createNotificationChannel()
         val intent : Intent = Intent(this, PlantesArroserAujourdhui::class.java);
         val pendingIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_IMMUTABLE )
@@ -39,7 +44,7 @@ class MyService : Service() {
         /*création de notification */
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Plantes à arroser aujourd'hui")
-            .setContentText("Liste des plantes à arroser aujourd'hui. Pour accéder à la liste, cliquez ici")
+            .setContentText("Liste des plantes à arroser aujourd'hui.")
             .setContentIntent(pendingIntent)
             .setAutoCancel(true) // la notification disparaît quand utilisateur...
             .setSmallIcon(R.drawable.ic_home) // SmallIcon est obligatoire, ic_add ; TEST
@@ -57,7 +62,6 @@ class MyService : Service() {
     //autre composant avec stopService(). Pas besoin d'implémenter
     //pour le service de type bound
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d("onStartCommand()","onStartCommand()")
         //le service devient foreground
         // startForeground( id : Int, notification : Notification)
         //stopSelf()
@@ -68,7 +72,6 @@ class MyService : Service() {
     // onDestroy() - appelée quand le service est détruit ou terminé.
     // Libérer les ressources utilisées
     override fun onDestroy() {
-        Log.d("onDestroy()","onDestroy()")
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
