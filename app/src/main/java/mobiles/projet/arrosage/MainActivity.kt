@@ -14,10 +14,14 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mobiles.projet.arrosage.databinding.ActivityMainBinding
@@ -32,18 +36,20 @@ import java.util.Calendar
 class MainActivity : AppCompatActivity() {
     // ActivityMainBinding : la classe générée par le view binding qui contient toutes les références vers tous les views de la layout
     private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter: ListePlantesRecycleAdapter
+    val model by lazy { ViewModelProvider(this).get(PlanteViewModel::class.java) }
+
 
     // L’activité démarre par l’appel à la fonction onCreate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-
-
         // On utilise la classe ActivityMainBinding pour créer
         // un objet binding de cette classe à l'aide de la méthode inflate().
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root) // binding.root est la référence vers le layout à la racine.
+
+        binding.recherche.setVisibility(View.GONE)
 
         // récupérer la référence vers le RecyclerView qui se trouve dans activity_main.xml
         val recyclerView = binding.recycler
@@ -56,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         val couleurImpaire: Int = ResourcesCompat.getColor(resources, R.color.couleurImpaire, null)
 
         // Construire adapter
-        var adapter: ListePlantesRecycleAdapter = ListePlantesRecycleAdapter( this@MainActivity, couleurPaire, couleurImpaire)
+         adapter = ListePlantesRecycleAdapter( this@MainActivity, couleurPaire, couleurImpaire)
         recyclerView.adapter = adapter // Associer adapter à RecyclerView
 
 
@@ -102,4 +108,33 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, PlantesArroserAujourdhui::class.java)
         startActivity(intent)
     }
+
+    fun rechercheDePlantes(item: MenuItem) {
+
+        if(binding.recherche.visibility == View.GONE) {
+            binding.recherche.setVisibility(View.VISIBLE)
+            binding.titre.setVisibility(View.GONE)
+
+            Toast.makeText(this, "Astuce : Appuyez à nouveau sur le bouton de recherche en bas de l'écran pour masquer à nouveau la barre de recherche", Toast.LENGTH_LONG).show()
+
+            binding.recherche.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    model.partialNomPays(s.toString())
+                    model.plantes.observe(this@MainActivity){ adapter.setPlantes(it) }
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+            })
+
+        } else {
+            binding.recherche.setVisibility(View.GONE)
+            binding.titre.setVisibility(View.VISIBLE)
+        }
+
+    }
+
 }

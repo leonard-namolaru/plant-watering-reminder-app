@@ -13,7 +13,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class ListePlantesRecycleAdapter (val context : Context, val couleurPaire: Int, val couleurImpaire: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var listeDesPlantes: List<Plante> = listOf()
+    var listeDesPlantes: List<Plante> = listOf()
 
     class VH(itemView: View) : RecyclerView.ViewHolder(itemView)
 

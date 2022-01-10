@@ -7,7 +7,8 @@
 
     <item android:id="@+id/search"
         android:title="Search"
-        android:icon="@drawable/ic_search" />
+        android:icon="@drawable/ic_search"
+        android:onClick="rechercheDePlantes" />
 
     <item android:id="@+id/placeholder"
         android:title=""

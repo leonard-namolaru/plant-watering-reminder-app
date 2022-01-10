@@ -7,11 +7,35 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/recherche"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        android:ems="10"
+        android:hint="Recherche de plantes"
+        android:text=""
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
+
+    <TextView
+        android:id="@+id/titre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tag="titre"
+        android:text="Vos plantes ont besoin de vous !"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/couleurPaire"
+        />
+
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/recycler"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="30dp"
+    android:layout_marginTop="60dp"
     android:layout_marginBottom="30dp"
     android:scrollbars="vertical" />
 

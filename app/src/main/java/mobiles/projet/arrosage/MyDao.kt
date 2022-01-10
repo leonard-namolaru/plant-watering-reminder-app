@@ -33,6 +33,12 @@ interface MyDao {
     @Query("SELECT * FROM Frequence WHERE IdPlante = :idPlante ")
     fun loadFrequencesById(vararg idPlante: Int): Array<Frequence> // Requête paramétrée : dans la requete le nom de paramètre de la fonction précédé par :
 
+    /**
+     * La méthode loadPartialName(nom) retourne une liste avec les plantes commençant par nom
+     */
+    @Query("SELECT * FROM Plante WHERE nomCommun like :nom || '%'") // || représente la concaténation de chaînes, le signe de pourcentage (%) représente zéro, un ou plusieurs caractères
+    fun loadPartialName(nom: String): List<Plante> // Requête paramétrée : dans la requete le nom de paramètre de la fonction précédé par :
+
     @Update
     fun updatePlante(vararg plante :Plante) : Int // La valeur de retour donne le nombre d'items modifiés par update.
 }
