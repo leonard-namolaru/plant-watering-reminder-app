@@ -23,6 +23,11 @@ class PlantesArroserAujourdhui : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val actionBar = supportActionBar
+        actionBar!!.title= "A Arroser "
+
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
         // On utilise la classe ActivityPlantesArroserAujourdhuiBinding pour créer
         // un objet binding de cette classe à l'aide de la méthode inflate().
         binding = ActivityPlantesArroserAujourdhuiBinding.inflate(layoutInflater)
@@ -79,6 +84,10 @@ class PlantesArroserAujourdhui : AppCompatActivity() {
         adapter.updateChecked(bd, nomsDesMois)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
     fun arrosagesEffectues(button: View) {
         // Récupéerer l'instance vers la base de données
         val bd = PlantesBD.getDatabase(application)
