@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mobiles.projet.arrosage.databinding.ActivityMainBinding
 import java.util.Calendar
+import kotlin.system.exitProcess
 
 /**
  * L'activité principale de l'application. C'est la première activité qui est affichée à l'utilisateur
@@ -110,7 +111,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun exitApp(item: MenuItem) {
-        super.onDestroy()
+        exitProcess(0)
     }
 
     fun rechercheDePlantes(item: MenuItem) {

@@ -106,7 +106,8 @@ class AjouterNouvellePlante : AppCompatActivity() {
         }
 
         localUri = Uri.parse(lien)
-        binding.lienPic.text = "Modifier image"
+        if(planteId != -1 && lien != "")
+            binding.lienPic.text = "Modifier image"
 
     }
 
