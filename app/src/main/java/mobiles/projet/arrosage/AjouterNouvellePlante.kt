@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import mobiles.projet.arrosage.databinding.ActivityAjouterNouvellePlanteBinding
 import android.view.View
 import android.widget.Spinner
@@ -62,6 +63,45 @@ class AjouterNouvellePlante : AppCompatActivity() {
 
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.setDisplayHomeAsUpEnabled(true)
+
+
+        val intent = getIntent() //retourne Intent qui a fait démarrer l'activité
+        val planteId : Int  = intent.getExtras()?.getInt("id")?:-1
+        val nomCommun : String  = intent.getExtras()?.getString( "nomC" )?:""
+        val nomLatin : String = intent.getExtras()?.getString( "nomL" )?:""
+        val lien : String =  intent.getExtras()?.getString("lien") ?:""
+
+        var freq : MutableList<Frequence> = mutableListOf()
+        val nbfreq =  intent.getExtras()?.getInt("nbFreq") ?:-1
+        var i:Int =0
+        while (i<nbfreq){
+            val moisDebut :  String =  intent.getExtras()?.getString("datedeb"+i) ?: ""
+            val moisFin :  String =  intent.getExtras()?.getString("datefin"+i) ?: ""
+            val nbFois :  String =  intent.getExtras()?.getString("nbfois"+i) ?: ""
+            freq.add( Frequence(-1,planteId,moisDebut,moisFin,nbFois))
+
+            i++
+        }
+
+
+        binding.nomCommun.setText(nomCommun)
+        binding.nomLatin.setText(nomLatin)
+
+        if(nbfreq > 0){
+            binding.freq1.setText(freq[0].nbFois)
+        }
+
+        if(nbfreq > 1){
+            binding.freq2.setText(freq[1].nbFois)
+        }
+
+        if(nbfreq > 2){
+            binding.freq3.setText(freq[2].nbFois)
+        }
+
+        localUri = Uri.parse(lien)
+        binding.lienPic.text = "Modifier image"
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

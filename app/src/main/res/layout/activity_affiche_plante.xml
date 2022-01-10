@@ -7,8 +7,9 @@
     android:scrollbars="vertical"
     android:background="@color/couleurPaire"
     tools:context=".AffichePlante">
-
-
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
     <LinearLayout
         android:id="@+id/linear_layout_vertical"
@@ -127,9 +128,21 @@
             android:onClick="supprimer"
             android:paddingStart="16dp"
             android:paddingEnd="12dp" />
+        <Button
+            android:id="@+id/updateButton"
+            android:layout_width="285dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:ems="23"
+            android:background="@android:color/white"
+            android:hint="Modifier"
+            android:onClick="modifier"
+            android:paddingStart="10dp"
+            android:paddingEnd="12dp" />
+
 
 
     </LinearLayout>
 
-
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

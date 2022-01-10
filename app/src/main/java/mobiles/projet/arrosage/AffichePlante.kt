@@ -112,10 +112,16 @@ class AffichePlante : AppCompatActivity() {
 
     }
 
+
+    fun CalendarToTimestamp(calendar: Calendar?): Long? {
+        return calendar?.getTimeInMillis()
+    }
+
     fun getListePlantes(view: View) {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
+
 
     fun supprimer(view: View){
         model.removePlante(plante)
@@ -123,6 +129,30 @@ class AffichePlante : AppCompatActivity() {
 
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+    }
+    fun modifier(view:View){
+        supprimer(view)
+        val intent = Intent(this, AjouterNouvellePlante::class.java)
+        val dateP:Long ?=  CalendarToTimestamp(plante.dateProchainArosage)
+        intent.putExtra("id", plante.idPlante)
+        intent.putExtra("nomC", plante.nomCommun)
+        intent.putExtra("nomL", plante.nomLatin)
+        intent.putExtra("dateP", dateP)
+        intent.putExtra("lien", plante.lienPhotoDeLaPlante)
+        intent.putExtra("nbFreq", listeDesFrequences.size)
+        for(i in listeDesFrequences.indices){
+            var datedeb : String = listeDesFrequences[i].dateDebut
+            var datefin : String  = listeDesFrequences[i].dateFin
+            var nb : String =  listeDesFrequences[i].nbFois
+            intent.putExtra("datedeb"+i, datedeb)
+            intent.putExtra("datefin"+i, datefin)
+            intent.putExtra("nbfois"+i, nb)
+
+        }
+
+
+        startActivity(intent)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
